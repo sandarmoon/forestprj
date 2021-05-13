@@ -1,54 +1,247 @@
-<!--
-=========================================================
-* Paper Dashboard 2 - v2.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-2
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    Paper Dashboard 2 by Creative Tim
-  </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-  <!-- CSS Files -->
-  <link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-  <link href="{{asset('backend/assets/css/paper-dashboard.css?v=2.0.1')}}" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="./assets/demo/demo.css" rel="stylesheet" />
+  <!-- Required meta tags --> 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Regal Admin</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="{{asset('backend/vendors/mdi/css/materialdesignicons.min.css')}}">
+  <link rel="stylesheet" href="{{asset('backend/vendors/feather/feather.css')}}">
+  <link rel="stylesheet" href="{{asset('backend/vendors/base/vendor.bundle.base.css')}}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="{{asset('backend/vendors/flag-icon-css/css/flag-icon.min.css')}}"/>
+  <link rel="stylesheet" href="{{asset('backend/vendors/font-awesome/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" href="{{asset('backend/vendors/jquery-bar-rating/fontawesome-stars-o.css')}}">
+  <link rel="stylesheet" href="{{asset('backend/vendors/jquery-bar-rating/fontawesome-stars.css')}}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{{asset('backend/css/style.css')}}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{{asset('backend/images/favicon.png')}}" />
 </head>
 
-<body class="">
- @yield('content')
-  <!--   Core JS Files   -->
-  <script src="{{asset('backend/assets/js/core/jquery.min.js')}}"></script>
-  <script src="{{asset('backend/assets/js/core/popper.min.js')}}"></script>
-  <script src="{{asset('backend/assets/js/core/bootstrap.min.js')}}"></script>
-  <script src="{{asset('backend/assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chart JS -->
-  <script src="{{asset('backend/assets/js/plugins/chartjs.min.js')}}"></script>
-  <!--  Notifications Plugin    -->
-  <script src="{{asset('backend/assets/js/plugins/bootstrap-notify.js')}}"></script>
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{asset('backend/assets/js/paper-dashboard.min.js?v=2.0.1')}}" type="text/javascript"></script>
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand text-white" href="index.html">
+          ThemeTreasure
+        </a>
+        
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Search Projects.." aria-label="search" aria-describedby="search">
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+            
+          <li class="nav-item dropdown d-flex">
+            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-air-play mx-0"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                    <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="preview-item-content flex-grow">
+                  <h6 class="preview-subject ellipsis font-weight-normal">David Grey
+                  </h6>
+                  <p class="font-weight-light small-text text-muted mb-0">
+                    The meeting is cancelled
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                    <img src="{{asset('backend/images/faces/face2.jpg')}}" alt="image" class="profile-pic">
+                </div>
+                <div class="preview-item-content flex-grow">
+                  <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
+                  </h6>
+                  <p class="font-weight-light small-text text-muted mb-0">
+                    New product launch
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                    <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="preview-item-content flex-grow">
+                  <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
+                  </h6>
+                  <p class="font-weight-light small-text text-muted mb-0">
+                    Upcoming board meeting
+                  </p>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item dropdown d-flex mr-4 ">
+            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-cog"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
+              <a class="dropdown-item preview-item">               
+                  <i class="icon-head"></i> Profile
+              </a>
+              <a class="dropdown-item preview-item">
+                  <i class="icon-inbox"></i> Logout
+              </a>
+            </div>
+          </li>
+          
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="user-profile">
+          <div class="user-image">
+            <img src="{{asset('backend/images/faces/face28.png')}}">
+          </div>
+          <div class="user-name">
+              Admin
+          </div>
+          <div class="user-designation">
+              Admin
+          </div>
+        </div>
+        <ul class="nav">
+          <li class="nav-item {{Request('dashboard'?'active':'')}}">
+            <a class="nav-link" href="{{route('dashboard')}}">
+              <i class="icon-box menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item {{Request('country'?'active':'')}}">
+            <a class="nav-link" data-toggle="collapse" href="{{route('country.index')}}">
+              <i class="icon-flag menu-icon"></i>
+              <span class="menu-title">Country</span>
+              
+            </a>
+            
+          </li>
+          <li class="nav-item {{Request('browser'?'active':'')}}">
+            <a class="nav-link" href="{{route('browser.index')}}">
+              <i class="icon-globe menu-icon"></i>
+              <span class="menu-title">Browser</span>
+            </a>
+          </li>
+          <li class="nav-item {{Request('category'?'active':'')}}">
+            <a class="nav-link" href="{{route('category.index')}}">
+              <i class="icon-file menu-icon"></i>
+              <span class="menu-title">Category</span>
+            </a>
+          </li>
+          <li class="nav-item {{Request('subcategory'?'active':'')}}">
+            <a class="nav-link" href="pages/charts/chartjs.html">
+              <i class="icon-paper-stack menu-icon"></i>
+              <span class="menu-title">Subcategory</span>
+            </a>
+          </li>
+          <li class="nav-item {{Request('kind'?'active':'')}}">
+            <a class="nav-link" href="pages/tables/basic-table.html">
+              <i class="icon-server menu-icon"></i>
+              <span class="menu-title">Kind</span>
+            </a>
+          </li>
+
+          <li class="nav-item {{Request('template'?'active':'')}}">
+            <a class="nav-link" href="pages/icons/feather-icons.html">
+              <i class="icon-clipboard menu-icon"></i>
+              <span class="menu-title">Template</span>
+            </a>
+          </li>
+
+          <li class="nav-item {{Request('author'?'active':'')}}">
+            <a class="nav-link" href="pages/icons/feather-icons.html">
+              <i class="icon-command menu-icon"></i>
+              <span class="menu-title">Author</span>
+            </a>
+          </li>
+
+          <li class="nav-item {{Request('user'?'active':'')}}">
+            <a class="nav-link" data-toggle="collapse" href="#auth" >
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">User</span>
+              
+            </a>
+            {{-- <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a></li>
+              </ul>
+            </div> --}}
+          </li>
+          
+        </ul>
+      </nav>
+      <div class="main-panel">
+      <!-- partial -->
+     @yield('content')
+      <!-- main-panel ends -->
+
+       <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">ThemeTreasure © 2021</span>
+            {{-- <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span> --}}
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- base:js -->
+  <script src="{{asset('backend/vendors/base/vendor.bundle.base.js')}}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{{asset('backend/js/off-canvas.js')}}"></script>
+  <script src="{{asset('backend/js/hoverable-collapse.js')}}"></script>
+  <script src="{{asset('backend/js/template.js')}}"></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+  <script src="{{asset('backend/vendors/chart.js/Chart.min.js')}}"></script>
+  <script src="{{asset('backend/vendors/jquery-bar-rating/jquery.barrating.min.js')}}"></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="{{asset('backend/js/dashboard.js')}}"></script>
+  <!-- End custom js for this page-->
+  @yield('script')
+
 </body>
 
 </html>
+
