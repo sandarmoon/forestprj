@@ -1,0 +1,53 @@
+@font-face{
+	font-family: 'Mulish_Regular';
+	src:url(../fonts/Mulish-Regular.ttf);
+}
+
+@font-face{
+	font-family: 'Mulish_Bold';
+	src:url(../fonts/Mulish-Bold.ttf);
+}
+
+@font-face{
+	font-family: 'Mulish_Black';
+	src:url(../fonts/Mulish-Black.ttf);
+}
+
+@font-face{
+	font-family: 'Mulish_Italic';
+	src:url(../fonts/Mulish-Italic.ttf);
+}
+
+@font-face{
+	font-family: 'Mulish_Light';
+	src:url(../fonts/Mulish-Light.ttf);
+}
+
+@font-face{
+	font-family: 'HoboStd';
+	src:url(../fonts/HoboStd.ttf);
+}
+
+.mulish_regular{
+	font-family: Mulish_Regular;
+}
+
+.mulish_bold{
+	font-family: Mulish_Bold;
+}
+
+.mulish_black{
+	font-family: Mulish_Black;
+}
+
+.mulish_italic{
+	font-family: Mulish_Italic;
+}
+
+.mulish_light{
+	font-family: Mulish_Light;
+}
+
+.hobostd{
+	font-family: HoboStd;
+}

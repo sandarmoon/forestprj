@@ -22,6 +22,7 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset('backend/images/favicon.png')}}" />
 </head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -239,6 +240,7 @@
   <script src="{{asset('backend/js/dashboard.js')}}"></script>
   <!-- End custom js for this page-->
   @yield('script')
+
 </body>
 
 </html>
