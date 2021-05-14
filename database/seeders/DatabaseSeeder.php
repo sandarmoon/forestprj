@@ -15,9 +15,19 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
          $this->call(
-        [CategorySeeder::class ,
-        SubcategorySeeder::class ,
-        GenreSeeder::class ]
+        [   CategorySeeder::class ,
+            SubcategorySeeder::class ,
+            GenreSeeder::class ,
+            BrowserSeeder::class,
+            CountrySeeder::class,
+            LanguageSeeder::class
+        ]
         );
+        // $this->call(
+        //     // BrowserSeeder::class
+        //     // CountrySeeder::class
+        //     // LanguageSeeder::class
+        //     SubcategorySeeder::class
+        // );
     }
 }

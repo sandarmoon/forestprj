@@ -9,10 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Country extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable=['name'];
-
-    public function subcategories($value='')
-    {
-    	return $this->hasMany('App\Models\Subcategory');
-    }
+    protected $fillable=['name','logo'];
+   
 }
