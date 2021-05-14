@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Subcategory;
+use App\Models\Category;
 
 class SubcategoryController extends Controller
 {
@@ -13,7 +15,9 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        //
+        $subcategories = Subcategory::orderBy('id','DESC')->get();
+        $categories = Category::all();
+        return view('backend.subcategory.index',compact('subcategories','categories'));
     }
 
     /**
@@ -34,7 +38,16 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+        ]);
+
+        $subcategory = new Subcategory;
+        $subcategory->name = $request->name;
+        $subcategory->category_id = $request->category;
+        $subcategory->save();
+        return redirect()->route('subcategory.index')->with('msg','Successfully added');
     }
 
     /**
@@ -68,7 +81,15 @@ class SubcategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+        ]);
+        $subcategory = Subcategory::find($id);
+        $subcategory->name = $request->name;
+        $subcategory->category_id = $request->category;
+        $subcategory->save();
+        return "ok";
     }
 
     /**
@@ -79,6 +100,8 @@ class SubcategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subcategory = Subcategory::find($id);
+        $subcategory->delete();
+        return redirect()->route('subcategory.index')->with('msg','Successfully deleted');
     }
 }

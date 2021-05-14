@@ -5,11 +5,11 @@ use App\Http\Controllers\BackendController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\BrowserController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SubCategoryBackendController;
+use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\CountryController;
-use App\Http\Controllers\KindBackendController;
-use App\Http\Controllers\TemplateBackendController;
-use App\Http\Controllers\AuthorBackendController;
+use App\Http\Controllers\KindController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\AuthorController;
 
 
 
@@ -32,6 +32,17 @@ use App\Http\Controllers\AuthorBackendController;
 
 // backend admin
 Route::get('dashboard',[BackendController::class,'dashboard'])->name('dashboard');
+Route::resource('/browser',BrowserController::class);
+Route::resource('/category',CategoryController::class);
+Route::resource('/country',CountryController::class);
+Route::resource('/subcategory',SubcategoryController::class);
+
+Route::resource('/kind',KindController::class);
+Route::resource('/item',ItemController::class);
+Route::resource('/author',AuthorController::class);
+
+Route::get('/category_index',[CategoryController::class,'category_index'])->name('category_index');
+
 
 
 // frontend
@@ -44,11 +55,5 @@ Route::get('illustration',[FrontendController::class,'illustration'])->name('fro
 Route::get('template',[FrontendController::class,'template'])->name('frontend.template');
 Route::get('templates',[FrontendController::class,'templates'])->name('frontend.templates');
 
-Route::resource('/browser',BrowserController::class);
-Route::resource('/category',CategoryController::class);
-Route::resource('/subcategory',SubcategoryController::class);
-Route::resource('/country',CountryController::class);
-Route::resource('/kind',KindController::class);
-Route::resource('/template',TemplateController::class);
-Route::resource('/author',AuthorController::class);
+
 

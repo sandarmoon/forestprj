@@ -10,4 +10,9 @@ class Country extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable=['name'];
+
+    public function subcategories($value='')
+    {
+    	return $this->hasMany('App\Models\Subcategory');
+    }
 }

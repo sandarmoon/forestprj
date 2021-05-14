@@ -5,7 +5,7 @@
 {{-- create div --}}
 <div class="row adddiv">
 	<div class="col-sm-12 mb-4  mb-4">
-      <h4 class="font-weight-bold text-dark">Category</h4>
+      <h4 class="font-weight-bold text-dark">Subcategory</h4>
     </div>
 
    	@if(session('msg'))
@@ -20,20 +20,24 @@
 			      <h4 class="card-title">Create New</h4>
 
 
-			      <div>
-			      	<form class="forms-sample" action="{{route('category.store')}}" method="post">
+			      <div class="form-group">
+			      	<form class="forms-sample" action="{{route('subcategory.store')}}" method="post">
 			      		@csrf
-	                    <div class="form-group">
+
+	                    <div >
 	                      <label for="exampleInputUsername1">Name</label>
-	                      <input type="text" class="form-control" id="exampleInputUsername1" name="name" placeholder="Category name " value="{{old('name')}}">
+	                      <input type="text" class="form-control" id="exampleInputUsername1" name="name" placeholder="Subcategory name " value="{{old('name')}}">
                     		<div class="form-control-feedback text-danger"> {{$errors->first('name') }} </div>
 
 	                    </div>
-	                    <div class="form-group">
-	                      <label for="regularfee">Regular Fee</label>
-	                      <input type="text" class="form-control" id="regularfee" name="regularfee" placeholder="Price" value="{{old('regularfee')}}">
-                    		<div class="form-control-feedback text-danger"> {{$errors->first('regularfee') }} </div>
 
+	                    <div class="form-group">
+	                      <label>Category</label>
+	                      	<select class="js-example-basic-single w-100 form-control" name="category">
+	                      	  @foreach($categories as $category)	
+		                      <option value="{{$category->id}}">{{$category->name}}</option>
+		                      @endforeach
+		                    </select>
 	                    </div>
 	                   
 	                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
@@ -66,9 +70,9 @@
 	                    </div>
 	                    <div class="form-group form-group-regularfee">
 	                      <label for="regularfee">Regular Fee</label>
-	                      <input type="text" class="form-control edit_regularfee" id="regularfee" name="regularfee" placeholder="Price" value="{{old('regularfee')}}">
-                    		<span class="show-error text-danger"></span>
-
+	                      	<select class="js-example-basic-single w-100 form-control category" name="category">
+	                      	 
+		                    </select>
 	                    </div>
 	                   
 	                    <button type="button" class="btn btn-primary mr-2 btn_update">Update</button>
@@ -90,30 +94,30 @@
 	<div class="col-lg-10 grid-margin stretch-card mx-auto">
 	  <div class="card">
 	    <div class="card-body">
-	      <h4 class="card-title">Category Table</h4>
+	      <h4 class="card-title">Subcategory Table</h4>
 	      
-	      <div class="table-responsive">
+	      <div class="table-responsive" >
 	        <table class="table" id="datatable">
 	          <thead>
 	            <tr>
 	              <th>#</th>
 	              <th>Name</th>
-	              <th>Regular Fee</th>
+	              <th>Category</th>
 	              <th>Action</th>
 	            </tr>
 	          </thead>
-	          <tbody class="index_table">
+	          <tbody class="">
 	          	@php
 	          		$i=1;
 	          	@endphp
-	          	@foreach($categories as $category)
+	          	@foreach($subcategories as $subcategory)
 	            <tr>
 	              <td>{{$i++}}</td>
-	              <td>{{$category->name}}</td>
-	              <td>{{$category->regularFee}}</td>
+	              <td>{{$subcategory->name}}</td>
+	              <td>{{$subcategory->category->name}}</td>
 	              <td>
-	              	<button class="btn btn-warning btn-sm text-white btn_edit" data-id="{{$category->id}}" data-name="{{$category->name}}" data-regularfee="{{$category->regularFee}}"><i class="fa fa-edit"></i></button>
-	              	<form action="{{route('category.destroy',$category->id)}}" method="post" class="d-inline-block" onclick="return confirm('Are you sure to delete?')">
+	              	<button class="btn btn-warning btn-sm text-white btn_edit" data-id="{{$subcategory->id}}" data-name="{{$subcategory->name}}" data-category_id="{{$subcategory->category_id}}" data-category = "{{$categories}}"><i class="fa fa-edit"></i></button>
+	              	<form action="{{route('subcategory.destroy',$subcategory->id)}}" method="post" class="d-inline-block" onclick="return confirm('Are you sure to delete?')">
 	              		@csrf
 	              		@method('DELETE')
 	              		<button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
@@ -140,20 +144,19 @@
 		$('.alert_msg').hide(2000);
 
 		$('#datatable').DataTable({
-			"lengthMenu": [[10, 25, 50, 100, 200 , 300 , 400 , 500], [10, 25, 50, 100, 200 , 300 , 400 , 500]],
-	        "pageLength": 10,
-	        "bPaginate": true,
-	        "bLengthChange": true,
-	        "bFilter": true,
-	        "bSort": true,
-	        "bInfo": true,
-	        "bAutoWidth": true,
-	        "bStateSave": true,
-	        "aoColumnDefs": [
-	            { 'bSortable': false, 'aTargets': [ -1,0] }
-	        ]
-	      });
-		
+          "lengthMenu": [[10, 25, 50, 100, 200 , 300 , 400 , 500], [10, 25, 50, 100, 200 , 300 , 400 , 500]],
+          "pageLength": 10,
+          "bPaginate": true,
+          "bLengthChange": true,
+          "bFilter": true,
+          "bSort": true,
+          "bInfo": true,
+          "bAutoWidth": true,
+          "bStateSave": true,
+          "aoColumnDefs": [
+              { 'bSortable': false, 'aTargets': [ -1,0] }
+          ]
+        });
 
 		$.ajaxSetup({
             headers: {
@@ -172,10 +175,23 @@
 		$('.btn_edit').click(function(){
 			var id = $(this).data('id');
 			var name = $(this).data('name');
-			var regularfee = $(this).data('regularfee');
+			var category_id = $(this).data('category_id');
+			var category = $(this).data('category');
+			var html = "";
+			var selected = "";
+			$.each(category,function(i,v){
+				console.log(v.id,category_id);
+				
+				html+=`<option value="${v.id}"`;
+				if(v.id == category_id){
+					html += `selected`;
+				}
+				html += `>${v.name}</option>`;
+			});
+
 			$('.edit_id').val(id);
 			$('.edit_name').val(name);
-			$('.edit_regularfee').val(regularfee);
+			$('.category').html(html);
 
 			$('.editdiv').show(1000);
 			$('.adddiv').hide(1000);
@@ -198,14 +214,15 @@
 
 	    $('.btn_update').click(function(){
 	    	var id = $('.edit_id').val();
-	    	var regularfee = $('.edit_regularfee').val();
+	    	var category = $('.category :selected').val();
+	    	
 	    	var name = $('.edit_name').val();
-	    	var route = "{{route('category.update',':id')}}";
+	    	var route = "{{route('subcategory.update',':id')}}";
 	    	route = route.replace(':id', id);
 	    	$.ajax({
 	    		url : route,
 	    		type : 'PUT',
-	    		data : {id:id,name:name,regularfee:regularfee},
+	    		data : {id:id,name:name,category:category},
 	    		success: function(data){
                     if(data){
                         location.reload();

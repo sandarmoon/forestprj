@@ -5,7 +5,9 @@
   <!-- Required meta tags --> 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Regal Admin</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <title>Themetreasure</title>
   <!-- base:css -->
   <link rel="stylesheet" href="{{asset('backend/vendors/mdi/css/materialdesignicons.min.css')}}">
   <link rel="stylesheet" href="{{asset('backend/vendors/feather/feather.css')}}">
@@ -17,10 +19,19 @@
   <link rel="stylesheet" href="{{asset('backend/vendors/jquery-bar-rating/fontawesome-stars-o.css')}}">
   <link rel="stylesheet" href="{{asset('backend/vendors/jquery-bar-rating/fontawesome-stars.css')}}">
   <!-- End plugin css for this page -->
+  {{-- select2 --}}
+  <link rel="stylesheet" href="{{asset('backend/vendors/select2/select2.min.css')}}">
+
+  <link rel="stylesheet" href="{{asset('backend/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
   <!-- inject:css -->
   <link rel="stylesheet" href="{{asset('backend/css/style.css')}}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{asset('backend/images/favicon.png')}}" />
+  <link rel="shortcut icon" href="{{asset('frontend/assets/logo/logo_transparent.png')}}" />
+
+  {{-- datatable --}}
+  <link rel="stylesheet" type="text/css" href="{{asset('backend/datatable/datatables.min.css')}}"/>
+
+
 </head>
 
 <body>
@@ -28,8 +39,12 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand text-white" href="index.html">
-          ThemeTreasure
+        <a href="{{route('dashboard')}}">
+          <img src="{{asset('frontend/assets/logo/logo_transparent.png')}}" alt="" width="60px" class="mt-2">
+        </a>
+        <a class="navbar-brand" href="{{route('dashboard')}}">
+          <img src="{{asset('frontend/assets/logo/logo_text_white.png')}}" alt="" class="img-fluid d-xl-inline-block d-lg-inline-block d-md-inline-block d-sm-none d-none">
+          
         </a>
         
       </div>
@@ -132,13 +147,14 @@
           </div>
         </div>
         <ul class="nav">
-          <li class="nav-item {{Request('dashboard'?'active':'')}}">
+          <li class="nav-item {{ Request::segment(1) === 'dashboard' ? 'active' : '' }}">
             <a class="nav-link" href="{{route('dashboard')}}">
               <i class="icon-box menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item {{Request('country'?'active':'')}}">
+
+          <li class="nav-item {{ Request::segment(1) === 'country' ? 'active' : '' }}">
             <a class="nav-link" data-toggle="collapse" href="{{route('country.index')}}">
               <i class="icon-flag menu-icon"></i>
               <span class="menu-title">Country</span>
@@ -146,46 +162,60 @@
             </a>
             
           </li>
-          <li class="nav-item {{Request('browser'?'active':'')}}">
+
+
+          <li class="nav-item {{ Request::segment(1) === 'browser' ? 'active' : '' }}">
             <a class="nav-link" href="{{route('browser.index')}}">
               <i class="icon-globe menu-icon"></i>
               <span class="menu-title">Browser</span>
             </a>
           </li>
-          <li class="nav-item {{Request('category'?'active':'')}}">
+
+          <li class="nav-item {{ Request::segment(1) === 'language' ? 'active' : '' }}">
+            <a class="nav-link" data-toggle="collapse" href="{{route('country.index')}}">
+              <i class="icon-flag menu-icon"></i>
+              <span class="menu-title">Language</span>
+              
+            </a>
+            
+          </li>
+
+          <li class="nav-item {{ Request::segment(1) === 'category' ? 'active' : '' }}">
             <a class="nav-link" href="{{route('category.index')}}">
               <i class="icon-file menu-icon"></i>
               <span class="menu-title">Category</span>
             </a>
           </li>
-          <li class="nav-item {{Request('subcategory'?'active':'')}}">
-            <a class="nav-link" href="pages/charts/chartjs.html">
+
+          <li class="nav-item {{ Request::segment(1) === 'subcategory' ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('subcategory.index')}}">
               <i class="icon-paper-stack menu-icon"></i>
               <span class="menu-title">Subcategory</span>
             </a>
           </li>
-          <li class="nav-item {{Request('kind'?'active':'')}}">
+
+          <li class="nav-item {{ Request::segment(1) === 'kind' ? 'active' : '' }}">
             <a class="nav-link" href="pages/tables/basic-table.html">
               <i class="icon-server menu-icon"></i>
               <span class="menu-title">Kind</span>
             </a>
           </li>
 
-          <li class="nav-item {{Request('template'?'active':'')}}">
+          <li class="nav-item {{ Request::segment(1) === 'item' ? 'active' : '' }}">
             <a class="nav-link" href="pages/icons/feather-icons.html">
               <i class="icon-clipboard menu-icon"></i>
-              <span class="menu-title">Template</span>
+              <span class="menu-title">item</span>
             </a>
           </li>
 
-          <li class="nav-item {{Request('author'?'active':'')}}">
+          <li class="nav-item {{ Request::segment(1) === 'author' ? 'active' : '' }}">
             <a class="nav-link" href="pages/icons/feather-icons.html">
               <i class="icon-command menu-icon"></i>
               <span class="menu-title">Author</span>
             </a>
           </li>
 
-          <li class="nav-item {{Request('user'?'active':'')}}">
+          <li class="nav-item {{ Request::segment(1) === 'user' ? 'active' : '' }}">
             <a class="nav-link" data-toggle="collapse" href="#auth" >
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">User</span>
@@ -205,9 +235,12 @@
         </ul>
       </nav>
       <div class="main-panel">
+        <div class="content-wrapper">
+
       <!-- partial -->
-     @yield('content')
+      @yield('content')
       <!-- main-panel ends -->
+        </div>
 
        <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -239,6 +272,13 @@
   <!-- Custom js for this page-->
   <script src="{{asset('backend/js/dashboard.js')}}"></script>
   <!-- End custom js for this page-->
+  {{-- select 2 --}}
+  <script src="{{asset('backend/vendors/select2/select2.min.js')}}"></script>
+  <script src="{{asset('backend/js/select2.js')}}"></script>
+
+  {{-- datatable --}}
+  <script type="text/javascript" src="{{asset('backend/datatable/datatables.min.js')}}"></script>
+
   @yield('script')
 
 </body>

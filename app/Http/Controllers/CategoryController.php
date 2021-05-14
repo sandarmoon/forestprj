@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('id','DESC')->get();
+
         return view('backend.category.index',compact('categories'));
     }
 
@@ -36,7 +38,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'regularfee' => 'required',
+        ]);
+
+        $category = new Category;
+        $category->name = $request->name;
+        $category->regularFee = $request->regularfee;
+        $category->save();
+
+        return redirect()->route('category.index')->with('msg','Successfully added'); 
     }
 
     /**
@@ -70,7 +82,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => "required",
+            'regularfee' => "required",
+        ]);
+
+        $category = Category::find($id);
+        $category->name=$request->name;
+        $category->regularFee = $request->regularfee;
+        $category->save();
+        return "OK";
     }
 
     /**
@@ -81,6 +102,15 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return redirect()->route('category.index')->with('msg','Successfully deleted');
     }
+
+    // public function category_index($value='')
+    // {
+    //     $categories = Category::orderBy('id','DESC')->get();
+    //     return Datatables::of($categories)->addIndexColumn()->toJson();
+       
+    // }
 }
