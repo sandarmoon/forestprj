@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Genres;
-
-class KindController extends Controller
+use App\Models\Language;
+class LanguageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,8 @@ class KindController extends Controller
      */
     public function index()
     {
-        
+        $languages = Language::orderBy('id','DESC')->get();
+        return view('backend.language.index',compact('languages'));
     }
 
     /**
@@ -35,7 +35,14 @@ class KindController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $language = new Language;
+        $language->name = $request->name;
+        $language->save();
+        return redirect()->route('language.index')->with('msg','Successfully added');
     }
 
     /**
@@ -69,7 +76,14 @@ class KindController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $language = Language::find($id);
+        $language->name = $request->name;
+        $language->save();
+        return "OK";
     }
 
     /**
@@ -80,6 +94,8 @@ class KindController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $language = Language::find($id);
+        $language->delete();
+        return redirect()->route('language.index')->with('msg','Successfully deleted');
     }
 }
