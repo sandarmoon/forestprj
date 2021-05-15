@@ -7,9 +7,10 @@ use App\Http\Controllers\BrowserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\CountryController;
-use App\Http\Controllers\KindController;
+use App\Http\Controllers\GenresController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\LanguageController;
 
 
 
@@ -36,8 +37,9 @@ Route::resource('/browser',BrowserController::class);
 Route::resource('/category',CategoryController::class);
 Route::resource('/country',CountryController::class);
 Route::resource('/subcategory',SubcategoryController::class);
+Route::resource('/language',LanguageController::class);
 
-Route::resource('/kind',KindController::class);
+Route::resource('/genres',GenresController::class);
 Route::resource('/item',ItemController::class);
 Route::resource('/author',AuthorController::class);
 

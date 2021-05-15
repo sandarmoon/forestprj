@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="{{asset('backend/vendors/font-awesome/css/font-awesome.min.css')}}">
   <link rel="stylesheet" href="{{asset('backend/vendors/jquery-bar-rating/fontawesome-stars-o.css')}}">
   <link rel="stylesheet" href="{{asset('backend/vendors/jquery-bar-rating/fontawesome-stars.css')}}">
+
+  <link rel="stylesheet" href="{{asset('backend/bootstrap/css/bootstrap.min.css')}}">
+
   <!-- End plugin css for this page -->
   {{-- select2 --}}
   <link rel="stylesheet" href="{{asset('backend/vendors/select2/select2.min.css')}}">
@@ -155,7 +158,7 @@
           </li>
 
           <li class="nav-item {{ Request::segment(1) === 'country' ? 'active' : '' }}">
-            <a class="nav-link" data-toggle="collapse" href="{{route('country.index')}}">
+            <a class="nav-link"  href="{{route('country.index')}}">
               <i class="icon-flag menu-icon"></i>
               <span class="menu-title">Country</span>
               
@@ -172,7 +175,7 @@
           </li>
 
           <li class="nav-item {{ Request::segment(1) === 'language' ? 'active' : '' }}">
-            <a class="nav-link" data-toggle="collapse" href="{{route('country.index')}}">
+            <a class="nav-link"  href="{{route('language.index')}}">
               <i class="icon-flag menu-icon"></i>
               <span class="menu-title">Language</span>
               
@@ -194,10 +197,10 @@
             </a>
           </li>
 
-          <li class="nav-item {{ Request::segment(1) === 'kind' ? 'active' : '' }}">
-            <a class="nav-link" href="pages/tables/basic-table.html">
+          <li class="nav-item {{ Request::segment(1) === 'genres' ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('genres.index')}}">
               <i class="icon-server menu-icon"></i>
-              <span class="menu-title">Kind</span>
+              <span class="menu-title">Geners</span>
             </a>
           </li>
 
@@ -275,6 +278,12 @@
   {{-- select 2 --}}
   <script src="{{asset('backend/vendors/select2/select2.min.js')}}"></script>
   <script src="{{asset('backend/js/select2.js')}}"></script>
+
+  {{-- boootstrap --}}
+  <script src="{{asset('backend/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+  {{-- upload photo --}}
+  <script src="{{asset('backend/js/file-upload.js')}}"></script>
 
   {{-- datatable --}}
   <script type="text/javascript" src="{{asset('backend/datatable/datatables.min.js')}}"></script>

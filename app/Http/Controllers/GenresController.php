@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Genres;
+use App\Models\Genre;
 
-class KindController extends Controller
+class GenresController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class KindController extends Controller
      */
     public function index()
     {
-        
+        $genres = Genre::orderBy('id','DESC')->get();
+        return view('backend.genres.index',compact('genres'));
     }
 
     /**
@@ -35,7 +36,14 @@ class KindController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $genres = new Genre;
+        $genres->name = $request->name;
+        $genres->save();
+
+        return redirect()->route('genres.index')->with('msg','Successfully added');
     }
 
     /**
@@ -69,7 +77,14 @@ class KindController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $genres = Genre::find($id);
+        $genres->name = $request->name;
+        $genres->save();
+
+        return "ok";
     }
 
     /**
@@ -80,6 +95,9 @@ class KindController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $genres = Genre::find($id);
+        $genres->delete();
+        return redirect()->route('genres.index')->with('msg','Successfully deleted');
+
     }
 }
