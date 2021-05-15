@@ -202,7 +202,7 @@
           </li>
 
           <li class="nav-item {{ Request::segment(1) === 'item' ? 'active' : '' }}">
-            <a class="nav-link" href="pages/icons/feather-icons.html">
+            <a class="nav-link" href="{{route('item.create')}}">
               <i class="icon-clipboard menu-icon"></i>
               <span class="menu-title">item</span>
             </a>

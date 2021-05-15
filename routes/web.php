@@ -39,6 +39,7 @@ Route::resource('/subcategory',SubcategoryController::class);
 
 Route::resource('/kind',KindController::class);
 Route::resource('/item',ItemController::class);
+Route::get('itemtype',[ItemController::class,'itemtype'])->name('itemtype');
 Route::resource('/author',AuthorController::class);
 
 Route::get('/category_index',[CategoryController::class,'category_index'])->name('category_index');

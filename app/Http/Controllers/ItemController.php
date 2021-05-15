@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class ItemController extends Controller
 {
@@ -24,6 +25,8 @@ class ItemController extends Controller
     public function create()
     {
         //
+        $categories = Category::all();
+        return view('backend.item.create',compact('categories'));
     }
 
     /**
@@ -80,5 +83,12 @@ class ItemController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function itemtype(Request $request)
+    {
+        $type = $request->type;
+        $category = Category::find($type);
+        return view('backend.item.uploadform',compact('category'));
     }
 }
