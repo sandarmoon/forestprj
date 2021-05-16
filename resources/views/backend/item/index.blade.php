@@ -34,6 +34,7 @@
                 <th>Price</th>
                 <th>Genre</th>
                 <th>Responsive</th>
+                <th>Version</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -41,14 +42,20 @@
               @php
                 $i=1;
               @endphp
-              @foreach($categories as $category)
+              @foreach($items as $item)
               <tr>
                 <td>{{$i++}}</td>
-                <td>{{$category->name}}</td>
-                <td>{{$category->regularFee}}</td>
+                <td>{{$item->name}}</td>
+                <td><img src="{{asset('thumbnail/'.$item->thumbnail)}}"></td>
+                <td>{{$item->subcategory->name}}</td>
+                <td>{{$item->author->user->name}}</td>
+                <td>@if($item->price_type == '$') ${{$item->price}} @else {{$item->price}}mmk @endif</td>
+                <td>{{$item->genre->name}}</td>
+                <td>{{$item->responsive}}</td>
+                <td>{{$item->version}}</td>
                 <td>
-                  <button class="btn btn-warning btn-sm text-white btn_edit" data-id="{{$category->id}}" data-name="{{$category->name}}" data-regularfee="{{$category->regularFee}}"><i class="fa fa-edit"></i></button>
-                  <form action="{{route('category.destroy',$category->id)}}" method="post" class="d-inline-block" onclick="return confirm('Are you sure to delete?')">
+                  <button class="btn btn-warning btn-sm text-white btn_edit" data-id="{{$item->id}}" data-name="{{$item->name}}" data-regularfee="{{$item->regularFee}}"><i class="fa fa-edit"></i></button>
+                  <form action="{{route('item.destroy',$item->id)}}" method="post" class="d-inline-block" onclick="return confirm('Are you sure to delete?')">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
