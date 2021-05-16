@@ -46,7 +46,7 @@
               <tr>
                 <td>{{$i++}}</td>
                 <td>{{$item->name}}</td>
-                <td><img src="{{asset('thumbnail/'.$item->thumbnail)}}"></td>
+                <td><img src="{{asset($item->thumbnail)}}"></td>
                 <td>{{$item->subcategory->name}}</td>
                 <td>{{$item->author->user->name}}</td>
                 <td>@if($item->price_type == '$') ${{$item->price}} @elseif($item->price_type == 'mmk') {{$item->price}}mmk @else Free @endif</td>

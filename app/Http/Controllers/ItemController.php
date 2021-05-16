@@ -64,26 +64,32 @@ class ItemController extends Controller
         $fileName = time().'.'.$request->file->extension();  
         
         $path = $request->file->storeAs('zipfile',$fileName,'public');
+
+        $zipfilepath = "/storage/".$path;
        // $path= $request->file->move(public_path('zipfile'), $fileName);
         
         //thumbnail
         $thumbnailName = time().'.'.$request->thumbnail->extension();
 
         $thumbnailpath = $request->thumbnail->storeAs('thumbnail',$thumbnailName,'public');
+
+        $thumbnailfilepath = "/storage/".$thumbnailpath;
         //$thumbnailpath = $request->thumbnail->move(public_path('thumbnail'),$thumbnailName);
 
         //preview
         $previewName = time().'.'.$request->preview->extension();
 
         $previewpath  = $request->preview->storeAs('preview',$previewName,'public');
+
+        $previewfilepath = "/storage/".$previewpath;
        // $previewpath = $request->preview->move(public_path('preview'),$previewName);
 
         /* Store $fileName name in DATABASE from HERE */
         $item = new Item();
         $item->name = request('name');
-        $item->zipfile = $fileName;
-        $item->thumbnail = $thumbnailName;
-        $item->previews = $previewName;
+        $item->zipfile = $zipfilepath;
+        $item->thumbnail = $thumbnailfilepath;
+        $item->previews = $previewfilepath;
         $item->subcategory_id = request('subcategory');
         $item->author_id = 1;
         $item->genre_id = request('genre');
