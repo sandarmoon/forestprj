@@ -24,7 +24,7 @@ class CreateItemsTable extends Migration
             $table->unsignedBigInteger('genre_id');
             $table->string('version')->nullable();
             $table->text('demoUrl')->nullable();
-            $table->integer('responsive')->nullable();
+            $table->string('responsive')->nullable();
             $table->text('tag')->nullable();
             $table->integer('status')->nullable();
             $table->integer('price')->nullable();

@@ -28,11 +28,11 @@
                       <option value="{{$category->id}}">{{$category->name}}</option>
                       @endforeach
                     </select>
-                    <div class="form-control-feedback text-danger"> {{$errors->first('name') }} </div>
+                    <div class="form-control-feedback text-danger"> {{$errors->first('type') }} </div>
 
                   </div>
                  
-                  <button type="submit" class="btn btn-primary mr-2">Submit</button>    
+                  <button type="submit" class="btn btn-primary mr-2">Next</button>    
               </form>
             </div>
 

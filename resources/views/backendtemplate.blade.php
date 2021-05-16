@@ -205,7 +205,7 @@
           </li>
 
           <li class="nav-item {{ Request::segment(1) === 'item' ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('item.create')}}">
+            <a class="nav-link" href="{{route('item.index')}}">
               <i class="icon-clipboard menu-icon"></i>
               <span class="menu-title">item</span>
             </a>
