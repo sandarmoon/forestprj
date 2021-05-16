@@ -14,7 +14,7 @@
 
 </div>
 
-<div class="row">
+<div class="row mt-5">
   
     
   <div class="col-lg-10 grid-margin stretch-card mx-auto">
@@ -75,4 +75,27 @@
 
 </div>
 
+@endsection
+
+@section('script')
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.alert_msg').hide(2000);
+
+    $('#datatable').DataTable({
+      "lengthMenu": [[10, 25, 50, 100, 200 , 300 , 400 , 500], [10, 25, 50, 100, 200 , 300 , 400 , 500]],
+          "pageLength": 10,
+          "bPaginate": true,
+          "bLengthChange": true,
+          "bFilter": true,
+          "bSort": true,
+          "bInfo": true,
+          "bAutoWidth": true,
+          "bStateSave": true,
+          "aoColumnDefs": [
+              { 'bSortable': false, 'aTargets': [ -1,0] }
+          ]
+        });
+  })
+</script>
 @endsection
