@@ -115,7 +115,7 @@ class ItemController extends Controller
         
         $unzipper  = new Unzip();
   
-        $filenames = $unzipper->extract(storage_path('app/public/'.$path),storage_path('app/public/zipfile/'));
+        $filenames = $unzipper->extract(storage_path('app/public/zipfile/'.$fileName),storage_path('app/public/zipfile/'));
 
         return redirect()->route('item.index')->with('msg','Item Successfully added'); 
     }
@@ -140,6 +140,9 @@ class ItemController extends Controller
     public function edit($id)
     {
         //
+        $item = Item::find($id);
+
+        return view('backend.item.show',compact('item'));
     }
 
     /**
@@ -163,6 +166,17 @@ class ItemController extends Controller
     public function destroy($id)
     {
         //
+        $item = Item::find($id);
+        $file_path = public_path().$item->zipfile;
+        unlink($file_path);
+        $thumbnail_path = public_path().$item->thumbnail;
+        unlink($thumbnail_path);
+        $preview_path = public_path().$item->previews;
+        unlink($preview_path);
+        $item->delete();
+
+        return redirect()->route('item.index')->with('msg','Item Successfully Deleted!');
+
     }
 
     public function itemtype(Request $request)

@@ -54,6 +54,7 @@
                 <td>{{$item->responsive}}</td>
                 <td>{{$item->version}}</td>
                 <td>
+                  <a href="{{route('item.edit',$item->id)}}" class="btn btn-info btn-sm text-white"><i class="fa fa-info"></i></a>
                   <button class="btn btn-warning btn-sm text-white btn_edit" data-id="{{$item->id}}" data-name="{{$item->name}}" data-regularfee="{{$item->regularFee}}"><i class="fa fa-edit"></i></button>
                   <form action="{{route('item.destroy',$item->id)}}" method="post" class="d-inline-block" onclick="return confirm('Are you sure to delete?')">
                     @csrf
