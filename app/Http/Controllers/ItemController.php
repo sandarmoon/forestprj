@@ -129,6 +129,9 @@ class ItemController extends Controller
     public function show($id)
     {
         //
+        $item = Item::find($id);
+
+        return view('backend.item.show',compact('item'));
     }
 
     /**
@@ -141,8 +144,9 @@ class ItemController extends Controller
     {
         //
         $item = Item::find($id);
+        $categories = Category::all();
 
-        return view('backend.item.show',compact('item'));
+        return view('backend.item.edit',compact('item','categories'));
     }
 
     /**
@@ -189,5 +193,27 @@ class ItemController extends Controller
         $genres = Genre::all();
 
         return view('backend.item.uploadform',compact('category','subcategories','genres'));
+    }
+
+    public function itemtypeedit(Request $request)
+    {
+        $request->validate(['type'=>'required','typeid'=>'required','cid' => 'required']);
+
+        
+        $type = $request->type;
+        $cid = $request->cid;
+        if($cid == $type){
+            $item = Item::find($request->typeid);
+            $category = Category::find($cid);
+            $subcategories = Subcategory::where('category_id',$cid)->get();
+        }else{
+            $item = [];
+            $category = Category::find($type);
+
+            $subcategories = Subcategory::where('category_id',$type)->get();
+        }
+        $genres = Genre::all();
+
+        return view('backend.item.edituploadform',compact('category','subcategories','genres','item'));
     }
 }
