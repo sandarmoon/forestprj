@@ -122,7 +122,8 @@
                         <label for="url" style="font-size: 18px">Demo URL</label>
                       </div>
                       <div class="col-6">
-                        <input type="text" name="url" id="url" class="form-control" value="{{old('url')}}">
+                        <input type="text" name="url" id="url" class="form-control" value="{{old('url')}}" placeholder="eg.https://www.facebook.com">
+
                         <div class="form-control-feedback text-danger"> {{$errors->first('url') }} </div>
                       </div>
                     </div>
