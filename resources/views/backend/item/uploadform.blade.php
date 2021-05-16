@@ -159,6 +159,19 @@
                   <div class="form-group m-5">
                     <div class="row">
                       <div class="offset-1 col-2">
+                        <label for="status">Upload Type Status</label>
+                      </div>
+                      <div class="col-6">
+                        <input type="radio" name="status" value="Free" id="free" {{old("status") == 'Free' ? 'checked' : ''}}><label for="free" style="margin-top: -3px; font-size: 15px" class="mr-5 ml-2">Free</label>
+                        <input type="radio" name="status" value="Premium" id="premium" {{old("status") == 'Premium' ? 'checked' : ''}}><label for="premium" style="margin-top: -3px;font-size: 15px" class="mr-5 ml-2">Premium</label>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group m-5" id="notfree">
+                    <div class="row">
+                      <div class="offset-1 col-2">
                         <label for="pricetype" style="font-size: 18px">Price Type</label>
                       </div>
                       <div class="col-6">
@@ -172,7 +185,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group m-5">
+                  <div class="form-group m-5" id="notfree1">
                     <div class="row">
                       <div class="offset-1 col-2">
                         <label for="price" style="font-size: 18px">Price</label>
@@ -211,4 +224,21 @@
       </div>
    
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#notfree').hide();
+    $('#notfree1').hide();
+    $('#premium').on('click',function(){
+      $('#notfree').show();
+      $('#notfree1').show();
+    })
+
+    $('#free').on('click',function(){
+      $('#notfree').hide();
+      $('#notfree1').hide();
+    })
+  })
+</script>
 @endsection

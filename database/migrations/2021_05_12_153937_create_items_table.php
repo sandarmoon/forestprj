@@ -26,7 +26,7 @@ class CreateItemsTable extends Migration
             $table->text('demoUrl')->nullable();
             $table->string('responsive')->nullable();
             $table->text('tag')->nullable();
-            $table->integer('status')->nullable();
+            $table->string('status')->nullable();
             $table->integer('price')->nullable();
             $table->string('price_type')->nullable();
             $table->text('message')->nullable();

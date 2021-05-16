@@ -49,7 +49,7 @@
                 <td><img src="{{asset('thumbnail/'.$item->thumbnail)}}"></td>
                 <td>{{$item->subcategory->name}}</td>
                 <td>{{$item->author->user->name}}</td>
-                <td>@if($item->price_type == '$') ${{$item->price}} @else {{$item->price}}mmk @endif</td>
+                <td>@if($item->price_type == '$') ${{$item->price}} @elseif($item->price_type == 'mmk') {{$item->price}}mmk @else Free @endif</td>
                 <td>{{$item->genre->name}}</td>
                 <td>{{$item->responsive}}</td>
                 <td>{{$item->version}}</td>

@@ -44,6 +44,7 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         //
+      
         $request->validate([
             'name' => 'required',
             'file' => 'required|file|mimes:zip',
@@ -55,10 +56,10 @@ class ItemController extends Controller
             'url' => 'required|active_url',
             'responsive' => 'required',
             'tag' => 'required',
-            'pricetype' => 'required',
-            'price' => 'required',
+            'status' => 'required',
             'message' => 'required'
         ]);
+
 
         //zip file
         $fileName = time().'.'.$request->file->extension();  
@@ -88,8 +89,19 @@ class ItemController extends Controller
         $item->demoUrl = request('url');
         $item->responsive = request('responsive');
         $item->tag = request('tag');
-        $item->price = request('price');
-        $item->price_type = request('pricetype');
+        if($request->status == 'Premium')
+        {
+            $request->validate([
+                'pricetype' => 'required',
+                'price' => 'required',
+            ]);
+            $item->status = $request->status;
+            $item->price = request('price');
+            $item->price_type = request('pricetype');
+        }else{
+            $item->status = $request->status;
+        }
+        
         $item->message = request('message');
         $item->save();
         
