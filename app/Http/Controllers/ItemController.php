@@ -60,21 +60,23 @@ class ItemController extends Controller
             'message' => 'required'
         ]);
 
-
         //zip file
         $fileName = time().'.'.$request->file->extension();  
-     
-        $path= $request->file->move(public_path('zipfile'), $fileName);
+        
+        $path = $request->file->storeAs('zipfile',$fileName,'public');
+       // $path= $request->file->move(public_path('zipfile'), $fileName);
         
         //thumbnail
         $thumbnailName = time().'.'.$request->thumbnail->extension();
 
-        $thumbnailpath = $request->thumbnail->move(public_path('thumbnail'),$thumbnailName);
+        $thumbnailpath = $request->thumbnail->storeAs('thumbnail',$thumbnailName,'public');
+        //$thumbnailpath = $request->thumbnail->move(public_path('thumbnail'),$thumbnailName);
 
         //preview
         $previewName = time().'.'.$request->preview->extension();
 
-        $previewpath = $request->preview->move(public_path('preview'),$previewName);
+        $previewpath  = $request->preview->storeAs('preview',$previewName,'public');
+       // $previewpath = $request->preview->move(public_path('preview'),$previewName);
 
         /* Store $fileName name in DATABASE from HERE */
         $item = new Item();
@@ -106,8 +108,8 @@ class ItemController extends Controller
         $item->save();
         
         $unzipper  = new Unzip();
-   
-        $filenames = $unzipper->extract($path,public_path('zipfile/'));
+  
+        $filenames = $unzipper->extract(storage_path('app/public/'.$path),storage_path('app/public/zipfile/'));
 
         return redirect()->route('item.index')->with('msg','Item Successfully added'); 
     }
