@@ -159,6 +159,129 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         //
+     
+        $request->validate([
+            'name' => 'required',
+            'subcategory' => 'required',
+            'genre' => 'required',
+            'version' => 'required',
+            'url' => 'required|active_url',
+            'responsive' => 'required',
+            'tag' => 'required',
+            'status' => 'required',
+            'message' => 'required'
+        ]);
+
+        $item = Item::find($id);
+
+        if($request->hasfile('file')){
+            $request->validate([
+                 'file' => 'required|file|mimes:zip'
+             ]);
+
+            $file_path = public_path().$item->zipfile;
+            unlink($file_path);
+
+            //zip file
+            $fileName = time().'.'.$request->file->extension();  
+            
+            $path = $request->file->storeAs('zipfile',$fileName,'public');
+
+            $zipfilepath = "/storage/".$path;
+
+
+            $unzipper  = new Unzip();
+  
+            $filenames = $unzipper->extract(storage_path('app/public/zipfile/'.$fileName),storage_path('app/public/zipfile/'));
+        }else{
+
+            $request->validate([
+                'oldfile' => 'required'
+            ]);
+
+            $zipfilepath = $request->oldfile;
+        }
+
+
+        if($request->hasfile('thumbnail')){
+            $request->validate([
+                 'thumbnail' => 'required|file|mimes:jpg,jpeg,bmp,png'
+             ]);
+
+            $thumbnail_path = public_path().$item->thumbnail;
+            unlink($thumbnail_path);
+
+            //thumbnail
+            $thumbnailName = time().'.'.$request->thumbnail->extension();
+
+            $thumbnailpath = $request->thumbnail->storeAs('thumbnail',$thumbnailName,'public');
+
+            $thumbnailfilepath = "/storage/".$thumbnailpath;
+
+        }else{
+
+            $request->validate([
+                'oldthumbnail' => 'required'
+            ]);
+
+            $thumbnailfilepath = $request->oldthumbnail;
+        }
+
+
+        if($request->hasfile('preview')){
+            $request->validate([
+                  'preview' => 'required|file|mimes:jpg,jpeg,bmp,png'
+             ]);
+
+            $preview_path = public_path().$item->previews;
+            unlink($preview_path);
+
+            //preview
+            $previewName = time().'.'.$request->preview->extension();
+
+            $previewpath  = $request->preview->storeAs('preview',$previewName,'public');
+
+            $previewfilepath = "/storage/".$previewpath;
+
+        }else{
+
+            $request->validate([
+                'oldpreview' => 'required'
+            ]);
+
+            $previewfilepath = $request->oldpreview;
+        }
+
+
+        $item->name = request('name');
+        $item->zipfile = $zipfilepath;
+        $item->thumbnail = $thumbnailfilepath;
+        $item->previews = $previewfilepath;
+        $item->subcategory_id = request('subcategory');
+        $item->author_id = 1;
+        $item->genre_id = request('genre');
+        $item->version = request('version');
+        $item->demoUrl = request('url');
+        $item->responsive = request('responsive');
+        $item->tag = request('tag');
+        if($request->status == 'Premium')
+        {
+            $request->validate([
+                'pricetype' => 'required',
+                'price' => 'required',
+            ]);
+            $item->status = $request->status;
+            $item->price = request('price');
+            $item->price_type = request('pricetype');
+        }else{
+            $item->status = $request->status;
+        }
+        
+        $item->message = request('message');
+        $item->save();
+        
+
+        return redirect()->route('item.index')->with('msg','Item Successfully updated'); 
     }
 
     /**
@@ -206,14 +329,16 @@ class ItemController extends Controller
             $item = Item::find($request->typeid);
             $category = Category::find($cid);
             $subcategories = Subcategory::where('category_id',$cid)->get();
+            $itemid = [];
         }else{
             $item = [];
+            $itemid = Item::find($request->typeid);
             $category = Category::find($type);
 
             $subcategories = Subcategory::where('category_id',$type)->get();
         }
         $genres = Genre::all();
 
-        return view('backend.item.edituploadform',compact('category','subcategories','genres','item'));
+        return view('backend.item.edituploadform',compact('category','subcategories','genres','item','itemid'));
     }
 }
