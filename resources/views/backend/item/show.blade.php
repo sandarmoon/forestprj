@@ -59,7 +59,7 @@
             </ul>
 
             <div class="d-grid gap-2" style="display: grid !important;">
-                <a href="#" class="custombtn_fill_sandybeach" style="display: inline-block;padding: 10px 32px;border-radius: 5px;text-decoration: none;margin-top: 6px;border: 2px solid #F9D6B6;text-align: center;background-color: #F9D6B6;color: #323232;font-size: 16px;"> 
+                <a href="{{asset($item->demoUrl)}}" class="custombtn_fill_sandybeach" style="display: inline-block;padding: 10px 32px;border-radius: 5px;text-decoration: none;margin-top: 6px;border: 2px solid #F9D6B6;text-align: center;background-color: #F9D6B6;color: #323232;font-size: 16px;"> 
                     <span class="align-middle">
                         <i class='bx bx-desktop' style="font-size:18px;"></i> Live Demo 
                     </span>

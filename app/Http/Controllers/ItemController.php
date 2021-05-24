@@ -8,7 +8,7 @@ use App\Models\Subcategory;
 use App\Models\Item;
 use App\Models\Genre;
 use VIPSoft\Unzip\Unzip;
-
+use ZipArchive;
 class ItemController extends Controller
 {
     /**
@@ -84,7 +84,63 @@ class ItemController extends Controller
         $previewfilepath = "/storage/".$previewpath;
        // $previewpath = $request->preview->move(public_path('preview'),$previewName);
 
-        /* Store $fileName name in DATABASE from HERE */
+   // echo 'ok';
+       
+        $za = new ZipArchive();
+
+        $za->open(storage_path('app/public/zipfile/') . $fileName);
+
+        $za->extractTo(storage_path('app/public/zipfile/').time().'/');
+        //$za->close();
+ $stat1 = $za->statIndex(0 ); 
+//dd(basename($stat['name']));
+        $tt  =  '';
+        for( $i = 0; $i < $za->numFiles; $i++ ){ 
+    $stat = $za->statIndex( $i ); 
+    if(basename( $stat['name'] ) == 'index.html'){
+        $tt = 'test';
+        break;
+    }
+}
+if($tt == 'test'){
+    $urll = '/storage/zipfile/'.time().'/'.basename($stat1['name']).'/index.html';
+    $item = new Item();
+        $item->name = request('name');
+        $item->zipfile = $zipfilepath;
+        $item->thumbnail = $thumbnailfilepath;
+        $item->previews = $previewfilepath;
+        $item->subcategory_id = request('subcategory');
+        $item->author_id = 1;
+        $item->genre_id = request('genre');
+        $item->version = request('version');
+        /*$item->demoUrl = request('url');*/
+        $item->demoUrl = $urll;
+        $item->responsive = request('responsive');
+        $item->tag = request('tag');
+        if($request->status == 'Premium')
+        {
+            $request->validate([
+                'pricetype' => 'required',
+                'price' => 'required',
+            ]);
+            $item->status = $request->status;
+            $item->price = request('price');
+            $item->price_type = request('pricetype');
+        }else{
+            $item->status = $request->status;
+        }
+        
+        $item->message = request('message');
+        $item->save();
+        return redirect()->route('item.index')->with('msg','Item Successfully added'); 
+    }else{
+        return redirect()->back();
+    }
+
+/*if( basename( $stat['name'] ) . PHP_EOL != 'index.html'){
+        return redirect()->back();
+    } else{
+        $za->close();
         $item = new Item();
         $item->name = request('name');
         $item->zipfile = $zipfilepath;
@@ -113,11 +169,17 @@ class ItemController extends Controller
         $item->message = request('message');
         $item->save();
         
-        $unzipper  = new Unzip();
+    }*/
+        /* Store $fileName name in DATABASE from HERE */
+        
+        
+        // $unzipper  = new Unzip();
   
-        $filenames = $unzipper->extract(storage_path('app/public/zipfile/'.$fileName),storage_path('app/public/zipfile/'));
+        // $filenames = $unzipper->extract(storage_path('app/public/zipfile/'.$fileName),storage_path('app/public/zipfile/'));
 
-        return redirect()->route('item.index')->with('msg','Item Successfully added'); 
+        
+
+      //  return redirect()->route('item.index')->with('msg','Item Successfully added'); 
     }
 
     /**
