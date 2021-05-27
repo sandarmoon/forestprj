@@ -15,4 +15,9 @@ class Subcategory extends Model
     {
     	return $this->belongsTo('App\Models\Category');
     }
+
+    public function items()
+    {
+    	return $this->hasMany('App\Models\Item');
+    }
 }
