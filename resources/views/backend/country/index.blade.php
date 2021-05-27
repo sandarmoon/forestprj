@@ -61,12 +61,14 @@
 			    <div class="card-body">
 			      <h4 class="card-title">Edit Existing data</h4>
 			      <div>
-			      	<form enctype="multipart/form-data" id="country_update">
+			      	<form id="country_update" enctype="multipart/form-data" method="post">
+			      		@csrf
+			      		@method('PUT')
 			      		<input type="hidden" name="id" class="edit_id">
 			      		<input type="hidden" name="oldphoto" class="oldlogovalue">
 	                    <div class="form-group form-group-name">
 	                      <label for="exampleInputUsername1">Name</label>
-	                      <input type="text" class="form-control edit_name" id="exampleInputUsername1" name="name" placeholder="Category name " value="{{old('name')}}">
+	                      <input type="text" class="form-control edit_name" id="exampleInputUsername1" name="name" placeholder="Category name " value="{{old('name')}}" required="">
                     		<span class="show-error text-danger"></span>
                     		
 
@@ -100,7 +102,7 @@
 	                    	
 	                    </div>
 	                    
-	                    <button type="button" class="btn btn-primary mr-2 btn_update">Update</button>
+	                    <button type="submit" class="btn btn-primary mr-2 btn_update">Update</button>
 	                    <button type="button" class="btn btn-secondary mr-2 btn_cancel">Cancel</button>
 	                </form>
 	                  
@@ -187,12 +189,7 @@
 	      });
 		
 
-		$.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
+		
 		$('.editdiv').hide();
 		$('.adddiv').show();
 
@@ -211,6 +208,9 @@
 			$('.oldlogovalue').val(oldlogo);
 			$('.editdiv').show(1000);
 			$('.adddiv').hide(1000);
+			var route = "{{route('country.update',':id')}}";
+	    	route = route.replace(':id', id);
+			$('#country_update').attr('action',route);
 
 		})
 
@@ -255,10 +255,17 @@
 	        group.find('.show-error').text('');
 	    }
 
-	 // $('#post_pone_insert').submit(function(event){
-     //            event.preventDefault();
-     //            var postpone_data = new FormData(this);
-     //        }
+	    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+	 // $('form#country_update').submit(function(event){
+	 //        event.preventDefault();
+	 //        var form_data = new FormData(this);
+	 //        console.log(form_data);
+	     
 
 	    $('.btn_update').click(function(){
 	    	var id = $('.edit_id').val();
@@ -267,30 +274,34 @@
 	    	var newlogo = $('.newlogovalue').val();
 	    	var route = "{{route('country.update',':id')}}";
 	    	route = route.replace(':id', id);
-	    	$.ajax({
-	    		url : route,
-	    		type : 'PUT',
-	    		data : {id:id,name:name,oldlogo,newlogo},
-	    		success: function(data){
-                    if(data){
-                        // location.reload();
-                    }
-                },
-                error: function(error) {
-                    if(error.status == 422){
-                        var errors = error.responseJSON;
-                        var data = errors.errors;
-            			console.log(data);
-                        $.each(data,function(i,v){
-                            showValidationErrors(i,v);
-                        })
-                        $('.editdiv').show();
-						$('.adddiv').hide();
+	    	
+	    	// console.log(id);
+	    	// $.ajax({
+	    	// 	url : route,
+	    	// 	type : 'PUT',
+	    	// 	enctype: 'multipart/form-data',
+	    	// 	data : {id:id,name:name,oldlogo:oldlogo,newlogo:newlogo},
+    			
+	    	// 	success: function(data){
+      //               if(data){
+      //                   location.reload();
+      //               }
+      //           },
+      //           error: function(error) {
+      //               if(error.status == 422){
+      //                   var errors = error.responseJSON;
+      //                   var data = errors.errors;
+      //       			console.log(data);
+      //                   $.each(data,function(i,v){
+      //                       showValidationErrors(i,v);
+      //                   })
+      //                   $('.editdiv').show();
+						// $('.adddiv').hide();
                        
-                    }
+      //               }
           
-                }
-	    	})
+      //           }
+	    	// })
 	    })
 	})
 </script>

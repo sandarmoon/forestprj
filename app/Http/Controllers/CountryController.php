@@ -86,25 +86,24 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+        ]);
 
-        dd($request);
-        // $request->validate([
-        //     'name' => 'required',
-        // ]);
+        if($request->hasfile('newlogo')){
+            $name = time().'_'.$request->newlogo->getClientOriginalName();
+            $filepath = $request->file('newlogo')->storeAs('country',$name,'public');
+            $photo = "/storage/".$filepath;
+         }else{
+            $photo = $request->oldlogo;
+         }
 
-        // if($request->hasfile('newlogo')){
-        //     $name = time().'_'.$request->newlogo->getClientOriginalName();
-        //     $filepath = $request->file('newlogo')->storeAs('country',$name,'public');
-        //     $photo = "/storage/".$filepath;
-        //  }else{
-        //     $photo = $request->oldlogo;
-        //  }
+         $country = Country::find($id);
+         $country->name = $request->name;
+         $country->logo = $photo;
+         $country->save();
+         return redirect()->route('country.index')->with('msg','Successfully updated');
 
-        //  $country = Country::find($id);
-        //  $country->name = $request->name;
-        //  $country->logo = $photo;
-        //  $country->save();
-        //  return "OK";
     }
 
     /**
