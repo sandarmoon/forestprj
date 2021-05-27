@@ -10,4 +10,9 @@ class Author extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable=['name','phoneno','address','user_id','country_id'];
+
+    public function user()
+    {
+      return $this->belongsTo('App\Models\User');
+    }
 }
