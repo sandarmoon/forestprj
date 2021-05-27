@@ -62,7 +62,19 @@
                     <li class="dropdown">
                         <a href="#"><span> Templates </span> <i class='bx bxs-chevron-down'></i></a>
                         <ul>
+                            @foreach($categories as $category)
                             <li>
+                                <a href="#">{{$category->name}}<span>
+                                @php 
+                                    $subcategories = $category->subcategories;  
+                                    foreach($subcategories as $sub){
+                                        $item = $sub->items;
+                                    }
+                               
+                                @endphp ( {{count($item)}} ) </span></a>
+                            </li>
+                            @endforeach
+                            <!-- <li>
                                 <a href="{{route('frontend.templates')}}"> Education <span> ( 5 ) </span>  </a>
                             </li>
                             
@@ -72,14 +84,19 @@
                             <li>
                                 <a href="{{route('frontend.templates')}}"> E-commerce <span> ( 3 ) </span> </a>
                             </li>
-                            <li><a href="{{route('frontend.templates')}}"> Hospital <span> ( 4 ) </span> </a></li>
+                            <li><a href="{{route('frontend.templates')}}"> Hospital <span> ( 4 ) </span> </a></li> -->
                         </ul>
                     </li>
 
                     <li class="dropdown">
                         <a href="#"><span> Freebies </span> <i class='bx bxs-chevron-down'></i></a>
                         <ul>
+                            @foreach($languages as $language)
                             <li>
+                                <a href="#">{{$language->name}} <span> ( 5 ) </span></a>
+                            </li>
+                            @endforeach
+                            <!-- <li>
                                 <a href="{{route('frontend.templates')}}"> HTML Template <span> ( 5 ) </span>  </a>
                             </li>
                             
@@ -88,7 +105,7 @@
                             </li>
                             <li>
                                 <a href="{{route('frontend.templates')}}"> Bootstrap Template <span> ( 3 ) </span> </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
 
