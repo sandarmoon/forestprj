@@ -64,7 +64,7 @@
                         <ul>
                             @foreach($categories as $category)
                             <li>
-                                <a href="#">{{$category->name}}<span>
+                                <a href="{{route('frontend.templates')}}">{{$category->name}}<span>
                                 @php
                                     $item = array(); 
                                     $subcategories = $category->subcategories;  
@@ -94,7 +94,7 @@
                         <ul>
                             @foreach($languages as $language)
                             <li>
-                                <a href="#">{{$language->name}} <span>
+                                <a href="{{route('frontend.templates')}}">{{$language->name}} <span>
                                     @php
                                         $languageitem = array(); 
                                         $itemlanguages = $language->items;  
