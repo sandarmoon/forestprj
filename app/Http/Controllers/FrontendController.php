@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Item;
 
 class FrontendController extends Controller
 {
     //
   public function index()
   {
-    $categories = Category::all();
-    return view('frontend.index',compact('categories'));
+    $latestitems = Item::orderBy('id','desc')->limit(4)->get();
+    
+    return view('frontend.index',compact('latestitems'));
   }
 
   public function contact()
