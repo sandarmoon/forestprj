@@ -65,7 +65,8 @@
                             @foreach($categories as $category)
                             <li>
                                 <a href="#">{{$category->name}}<span>
-                                @php 
+                                @php
+                                    $item = array(); 
                                     $subcategories = $category->subcategories;  
                                     foreach($subcategories as $sub){
                                         $item = $sub->items;
@@ -93,7 +94,16 @@
                         <ul>
                             @foreach($languages as $language)
                             <li>
-                                <a href="#">{{$language->name}} <span> ( 5 ) </span></a>
+                                <a href="#">{{$language->name}} <span>
+                                    @php
+                                        $languageitem = array(); 
+                                        $itemlanguages = $language->items;  
+                                        foreach($itemlanguages as $ilang){
+                                            $languageitem = $ilang->languages;
+                                        }
+                               
+                                    @endphp
+                                 ( {{count($languageitem)}} ) </span></a>
                             </li>
                             @endforeach
                             <!-- <li>
