@@ -147,6 +147,22 @@
                     </div>
                   </div>
 
+
+                  <div class="form-group m-5">
+                    <div class="row">
+                      <div class="offset-1 col-2">
+                        <label for="language" style="font-size: 18px">Language</label>
+                      </div>
+                      <div class="col-6">
+                        <select name="languages[]" class="js-example-placeholder-multiple1 js-states form-control" multiple="multiple">
+                          @foreach($languages as $language)
+                          <option value="{{$language->id}}" @foreach($item->languages as $lang) <?php if($language->id == $lang->id) { ?> selected <?php };?> @endforeach>{{$language->name}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="form-group m-5">
                     <div class="row">
                       <div class="offset-1 col-2">
@@ -166,6 +182,22 @@
                           @endif
                         </select>
                         <div class="form-control-feedback text-danger"> {{$errors->first('genre') }} </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group m-5">
+                    <div class="row">
+                      <div class="offset-1 col-2">
+                        <label for="browser" style="font-size: 18px">Browser</label>
+                      </div>
+                      <div class="col-6">
+                        <select name="browsers[]" class="js-example-placeholder-multiple js-states form-control" multiple="multiple">
+                          @foreach($browsers as $browser)
+                          <option value="{{$browser->id}}" @foreach($item->browsers as $brow) <?php if($browser->id == $brow->id) { ?> selected <?php };?> @endforeach>{{$browser->name}}</option>
+                          @endforeach
+                        </select>
+
                       </div>
                     </div>
                   </div>
@@ -367,6 +399,14 @@
       $('#notfree3').hide();
       $('#notfree1').hide();
     })
+
+    $(".js-example-placeholder-multiple").select2({
+    placeholder: "Select at least one browser"
+    });
+
+    $(".js-example-placeholder-multiple1").select2({
+    placeholder: "Select at least one language"
+    });
   })
 </script>
 @endsection

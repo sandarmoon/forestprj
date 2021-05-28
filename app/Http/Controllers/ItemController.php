@@ -261,9 +261,31 @@ if($tt == 'test'){
             $zipfilepath = "/storage/".$path;
 
 
-            $unzipper  = new Unzip();
+            /*$unzipper  = new Unzip();
   
-            $filenames = $unzipper->extract(storage_path('app/public/zipfile/'.$fileName),storage_path('app/public/zipfile/'));
+            $filenames = $unzipper->extract(storage_path('app/public/zipfile/'.$fileName),storage_path('app/public/zipfile/'));*/
+
+            $za = new ZipArchive();
+
+            $za->open(storage_path('app/public/zipfile/') . $fileName);
+
+            $za->extractTo(storage_path('app/public/zipfile/').time().'/');
+            //$za->close();
+            $stat1 = $za->statIndex(0 ); 
+//dd(basename($stat['name']));
+            $tt  =  '';
+            for( $i = 0; $i < $za->numFiles; $i++ ){ 
+            $stat = $za->statIndex( $i ); 
+            if(basename( $stat['name'] ) == 'index.html'){
+                $tt = 'test';
+                break;
+                }
+            }
+                if($tt == 'test'){
+                    $urll = '/storage/zipfile/'.time().'/'.basename($stat1['name']).'/index.html';
+                }else{
+                    return redirect()->back();
+                }
         }else{
 
             $request->validate([
@@ -271,6 +293,8 @@ if($tt == 'test'){
             ]);
 
             $zipfilepath = $request->oldfile;
+
+            $urll = $item->demoUrl;
         }
 
 
@@ -332,7 +356,7 @@ if($tt == 'test'){
         $item->author_id = 1;
         $item->genre_id = request('genre');
         $item->version = request('version');
-        $item->demoUrl = request('url');
+        $item->demoUrl = $urll;
         $item->responsive = request('responsive');
         $item->tag = request('tag');
         if($request->status == 'Premium')
@@ -351,6 +375,11 @@ if($tt == 'test'){
         $item->message = request('message');
         $item->save();
         
+        $item->languages()->detach();
+        $item->languages()->attach(request('languages'));
+
+        $item->browsers()->detach();
+        $item->browsers()->attach(request('browsers'));
 
         return redirect()->route('item.index')->with('msg','Item Successfully updated'); 
     }
@@ -411,7 +440,9 @@ if($tt == 'test'){
             $subcategories = Subcategory::where('category_id',$type)->get();
         }
         $genres = Genre::all();
+        $browsers = Browser::all();
+        $languages = Language::all();
 
-        return view('backend.item.edituploadform',compact('category','subcategories','genres','item','itemid'));
+        return view('backend.item.edituploadform',compact('category','subcategories','genres','item','itemid','browsers','languages'));
     }
 }
