@@ -25,4 +25,15 @@ class Item extends Model
     {
       return $this->belongsTo('App\Models\Genre');
     }
+
+    public function languages()
+    {
+        return $this->belongsToMany('App\Models\Language','language_item');
+    }
+
+
+    public function browsers()
+    {
+        return $this->belongsToMany('App\Models\Browser','browser_item');
+    }
 }

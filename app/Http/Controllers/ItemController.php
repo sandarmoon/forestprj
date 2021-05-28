@@ -9,6 +9,9 @@ use App\Models\Item;
 use App\Models\Genre;
 use VIPSoft\Unzip\Unzip;
 use ZipArchive;
+use App\Models\Browser;
+use App\Models\Language;
+
 class ItemController extends Controller
 {
     /**
@@ -44,7 +47,8 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         //
-      
+     // dd($request->languages);
+     //dd($request->browsers);
         $request->validate([
             'name' => 'required',
             'file' => 'required|file|mimes:zip',
@@ -132,6 +136,11 @@ if($tt == 'test'){
         
         $item->message = request('message');
         $item->save();
+
+        $item->languages()->attach(request('languages'));
+
+        $item->browsers()->attach(request('browsers'));
+
         return redirect()->route('item.index')->with('msg','Item Successfully added'); 
     }else{
         return redirect()->back();
@@ -376,8 +385,10 @@ if($tt == 'test'){
 
         $subcategories = Subcategory::where('category_id',$type)->get();
         $genres = Genre::all();
+        $browsers = Browser::all();
+        $languages = Language::all();
 
-        return view('backend.item.uploadform',compact('category','subcategories','genres'));
+        return view('backend.item.uploadform',compact('category','subcategories','genres','browsers','languages'));
     }
 
     public function itemtypeedit(Request $request)
