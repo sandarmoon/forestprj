@@ -10,4 +10,9 @@ class Category extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable=['name','regularFee'];
+
+    public function subcategories($value='')
+    {
+    	return $this->hasMany('App\Models\Subcategory');
+    }
 }

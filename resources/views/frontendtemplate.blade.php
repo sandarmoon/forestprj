@@ -62,7 +62,20 @@
                     <li class="dropdown">
                         <a href="#"><span> Templates </span> <i class='bx bxs-chevron-down'></i></a>
                         <ul>
+                            @foreach($categories as $category)
                             <li>
+                                <a href="{{route('frontend.templates')}}">{{$category->name}}<span>
+                                @php
+                                    $item = array(); 
+                                    $subcategories = $category->subcategories;  
+                                    foreach($subcategories as $sub){
+                                        $item = $sub->items;
+                                    }
+                               
+                                @endphp ( {{count($item)}} ) </span></a>
+                            </li>
+                            @endforeach
+                            <!-- <li>
                                 <a href="{{route('frontend.templates')}}"> Education <span> ( 5 ) </span>  </a>
                             </li>
                             
@@ -72,14 +85,28 @@
                             <li>
                                 <a href="{{route('frontend.templates')}}"> E-commerce <span> ( 3 ) </span> </a>
                             </li>
-                            <li><a href="{{route('frontend.templates')}}"> Hospital <span> ( 4 ) </span> </a></li>
+                            <li><a href="{{route('frontend.templates')}}"> Hospital <span> ( 4 ) </span> </a></li> -->
                         </ul>
                     </li>
 
                     <li class="dropdown">
                         <a href="#"><span> Freebies </span> <i class='bx bxs-chevron-down'></i></a>
                         <ul>
+                            @foreach($languages as $language)
                             <li>
+                                <a href="{{route('frontend.templates')}}">{{$language->name}} <span>
+                                    @php
+                                        $languageitem = array(); 
+                                        $itemlanguages = $language->items;  
+                                        foreach($itemlanguages as $ilang){
+                                            $languageitem = $ilang->languages;
+                                        }
+                               
+                                    @endphp
+                                 ( {{count($languageitem)}} ) </span></a>
+                            </li>
+                            @endforeach
+                            <!-- <li>
                                 <a href="{{route('frontend.templates')}}"> HTML Template <span> ( 5 ) </span>  </a>
                             </li>
                             
@@ -88,7 +115,7 @@
                             </li>
                             <li>
                                 <a href="{{route('frontend.templates')}}"> Bootstrap Template <span> ( 3 ) </span> </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
 
@@ -98,12 +125,45 @@
                     <li>
                         <a class="nav-link scrollto" href="{{route('frontend.contactus')}}">Contact</a>
                     </li>
-
+                    @if(!Auth::check())
                     <li>
+                        
                         <a class="pe-auto nav-link" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#authModal">
                             <i class='bx bx-user pe-2 ' ></i> Member
                         </a>
                     </li>
+                    @else
+                    <li class="dropdown">
+                        <a href="#"><span> {{Auth::user()->name}} </span> <i class='bx bxs-chevron-down'></i></a>
+                        <ul>
+                            <li>
+                                <a href="{{route('author.create')}}"> Author </a>
+                            </li>
+                            <li>
+                                <a href="templates.html"> List <span> ( 3 ) </span> </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item preview-item" href="route('logout')" class="d-inline" 
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logoutform').closest('form').submit();">
+                                    
+
+                                    
+                                                Log out
+                                                
+
+                                    <form method="POST" id="logoutform" class="d-inline" action="{{ route('logout') }}">
+                                                @csrf
+
+                                                
+                                            </form>
+                                </a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </li>
+                    @endif
                     <li>
                         <div class="overlay">
                             <a class="nav-link scrollto navicon mk-search-trigger mk-fullscreen-trigger" id="search-button-listener" href="javascript:void(0)">
@@ -178,25 +238,33 @@
                             <h1> Sign Up </h1>
                             <p> or <a href="javascript:void(0)" id="showlogin"> SignIn to your account. </a> </p>
 
-                            <form class="row g-3">
+                            <!-- Validation Errors -->
+                         <!-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> -->
+
+                            <form class="row g-3" method="POST" id="signupform" >
+                                @csrf
                                 <div class="col-12 form-group">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="inputName" placeholder="Your Name">
-                                        <label for="inputName" class="ps-3">Your Name</label>
+                                        <input type="text"
+                                        name="name" class="form-control" id="inputName" placeholder="Your Name">
+                                        <label for="inputName" class="ps-3 name_err">Your Name</label>
+                                        <span class="text-danger error-text "></span>
                                     </div>
                                 </div>
 
                                 <div class="col-12 form-group">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
-                                        <label for="inputEmail" class="ps-3">Email address</label>
+                                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                                        <label for="inputEmail" class="ps-3 email_err">Email address</label>
+                                         <span class="text-danger error-text "></span>
                                     </div>
                                 </div>
 
                                 <div class="col-12 form-group">
                                     <div class="form-floating">
-                                        <input type="password" class="form-control password" id="inputPassword" placeholder="Password" data-pass-target="">
-                                        <label for="inputPassword" class="ps-3">Password</label>
+                                        <input type="password" name="password" class="form-control password" id="inputPassword" placeholder="Password" data-pass-target="">
+                                        <label for="inputPassword" class="ps-3 password_err">Password</label>
+                                        <span class="text-danger error-text "></span>
                                         <div class="eye slash">
                                             <div></div>
                                             <div></div>
@@ -206,16 +274,18 @@
 
                                 <div class="col-12 form-group">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkPolicy">
+                                        <input  class="form-check-input" type="checkbox"  value="1" id="checkPolicy">
                                         <label class="form-check-label" for="checkPolicy">
-                                            I agree to the <a href=""> Privacy Policy </a> .
+                                            I agree to the <a href=""> Privacy Policy </a> .<br/>
+                                            <span class="text-danger  error-text accept_err"></span>
                                         </label>
+                                        
                                     </div>
                                 </div>
 
                                 <div class="col-12 form-group">
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-custom text-center" type="button"> Create Account </button>
+                                        <button class="btn btn-custom text-center" type="submit"> Create Account </button>
                                     </div>
                                 </div>
 
@@ -248,18 +318,19 @@
                         <div class="container-fluid" id="content-login">
                             <h1> Sign In </h1>
                             <p> or <a href="javascript:void(0)" id="showregister"> SignUp to your account. </a> </p>
-
-                            <form class="row g-3">
+                            <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                            <form class="row g-3" method="POST" action="{{route('login')}}">
+                                @csrf
                                 <div class="col-12 form-group">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="logininputEmail" placeholder="name@example.com">
+                                        <input type="email" name="email" class="form-control" id="logininputEmail" placeholder="name@example.com">
                                         <label for="logininputEmail" class="ps-3">Email address</label>
                                     </div>
                                 </div>
 
                                 <div class="col-12 form-group">
                                     <div class="form-floating">
-                                        <input type="password" class="form-control password" id="logininputPassword" placeholder="Password" data-pass-target="">
+                                        <input type="password" name="password" class="form-control password" id="logininputPassword" placeholder="Password" data-pass-target="">
                                         <label for="logininputPassword" class="ps-3">Password</label>
                                         <div class="eye slash">
                                             <div></div>
@@ -269,16 +340,20 @@
                                 </div>
 
                                 <div class="col-12 form-group">
-                                    <a href=""> Forget Password </a>
+                                    @if (Route::has('password.request'))
+                                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                                            {{ __('Forgot your password?') }}
+                                        </a>
+                                    @endif
                                 </div>
 
                                 <div class="col-12 form-group">
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-custom text-center" type="button"> Login </button>
+                                        <button class="btn btn-custom text-center" type="submit"> Login </button>
                                     </div>
                                 </div>
 
-                                <!-- <hr> -->
+                               {{--  <!-- <hr> -->
                                 <div class="separator txt_mischka"> OR </div>
                                 <p class="text-center txt_mischka"> with your social network </p>
 
@@ -299,7 +374,7 @@
                                         </div>
                                     </div>
 
-                                </div>
+                                </div> --}}
 
                             </form>
                         </div>
@@ -329,6 +404,52 @@
     <!-- Template Main JS File -->
     <script src="{{asset('frontend/assets/js/main.js')}}"></script>
     <script src="{{asset('frontend/assets/js/custom.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+            
+            $('#signupform').submit(function(e){
+                e.preventDefault();
+                var _token = $("input[name='_token']").val();
+                // console.log(_token);
+                var email = $("#inputEmail").val();
+                var name = $("#inputName").val();
+                var pswd = $("#inputPassword").val();
+                var accept=$("#checkPolicy").val();
+
+                 $.ajax({
+                    url: "{{ route('register') }}",
+                    type:'POST',
+                    data: {_token:_token, email:email, password:pswd,name:name,accept:accept},
+                    success: function(data) {
+                    //   printMsg(data);
+                    if($.isEmptyObject(data.errors)){
+                        console.log(data.success);
+                        window.location.href="{{ route('frontend.index') }}";
+                     }
+                        
+                    },
+                    error: function(error){
+                        printMsg(error.responseJSON);
+                    }
+
+                });
+
+                function printMsg (msg) {
+                    console.log(msg);
+                    
+                        $.each( msg.errors, function( key, value ) {
+                        $('.'+key+'_err').html(value);
+                        $('.'+key+'_err').addClass('text-danger');
+                        });
+                    
+                }
+               
+
+               
+                
+            })
+        })
+    </script>
 
 </body>
 

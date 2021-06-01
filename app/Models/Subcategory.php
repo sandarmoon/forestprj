@@ -10,4 +10,14 @@ class Subcategory extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable=['name','category_id'];
+
+    public function category($value='')
+    {
+    	return $this->belongsTo('App\Models\Category');
+    }
+
+    public function items()
+    {
+    	return $this->hasMany('App\Models\Item');
+    }
 }

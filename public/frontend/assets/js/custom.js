@@ -69,5 +69,7 @@ $(document).ready(function() {
     // $('.mpu_payment').select2();
 
     
+
+    
     
 });

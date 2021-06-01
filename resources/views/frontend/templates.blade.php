@@ -29,7 +29,7 @@
                             <div class="member-img">
                                 <img src="{{asset('frontend/assets/img/website/w1.png')}}" class="img-fluid websiteImg" alt="">
                                 <div class="social">
-                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                    <a href="{{route('frontend.template')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
                                         <i class='bx bx-laptop' ></i>
                                     </a>
                                     <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="member-info">
-                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <a href="{{route('frontend.template')}}"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
                                 <span>
                                     By <a href="" class="mulish_bold"> Admin </a>
                                     in <a href="" class="mulish_bold"> Education </a>
@@ -56,7 +56,7 @@
                             <div class="member-img">
                                 <img src="{{asset('frontend/assets/img/website/w2.jpeg')}}" class="img-fluid websiteImg" alt="">
                                 <div class="social">
-                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                    <a href="{{route('frontend.template')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
                                         <i class='bx bx-laptop' ></i>
                                     </a>
                                     <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                             <div class="member-info">
-                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <a href="{{route('frontend.template')}}"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
                                 <span>
                                     By <a href="" class="mulish_bold"> Admin </a>
                                     in <a href="" class="mulish_bold"> Education </a>
@@ -84,7 +84,7 @@
                             <div class="member-img">
                                 <img src="{{asset('frontend/assets/img/website/w3.jpeg')}}" class="img-fluid websiteImg" alt="">
                                 <div class="social">
-                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                    <a href="{{route('frontend.template')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
                                         <i class='bx bx-laptop' ></i>
                                     </a>
                                     <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="member-info">
-                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <a href="{{route('frontend.template')}}"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
                                 <span>
                                     By <a href="" class="mulish_bold"> Admin </a>
                                     in <a href="" class="mulish_bold"> Education </a>
@@ -112,7 +112,7 @@
                             <div class="member-img">
                                 <img src="{{asset('frontend/assets/img/website/w4.png')}}" class="img-fluid websiteImg" alt="">
                                 <div class="social">
-                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                    <a href="{{route('frontend.template')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
                                         <i class='bx bx-laptop' ></i>
                                     </a>
                                     <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                             <div class="member-info">
-                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <a href="{{route('frontend.template')}}"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
                                 <span>
                                     By <a href="" class="mulish_bold"> Admin </a>
                                     in <a href="" class="mulish_bold"> Education </a>
@@ -139,7 +139,7 @@
                             <div class="member-img">
                                 <img src="{{asset('frontend/assets/img/website/w1.png')}}" class="img-fluid websiteImg" alt="">
                                 <div class="social">
-                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                    <a href="{{route('frontend.template')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
                                         <i class='bx bx-laptop' ></i>
                                     </a>
                                     <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
@@ -148,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="member-info">
-                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <a href="{{route('frontend.template')}}"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
                                 <span>
                                     By <a href="" class="mulish_bold"> Admin </a>
                                     in <a href="" class="mulish_bold"> Education </a>
@@ -166,7 +166,7 @@
                             <div class="member-img">
                                 <img src="{{asset('frontend/assets/img/website/w2.jpeg')}}" class="img-fluid websiteImg" alt="">
                                 <div class="social">
-                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                    <a href="{{route('frontend.template')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
                                         <i class='bx bx-laptop' ></i>
                                     </a>
                                     <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                             <div class="member-info">
-                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <a href="{{route('frontend.template')}}"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
                                 <span>
                                     By <a href="" class="mulish_bold"> Admin </a>
                                     in <a href="" class="mulish_bold"> Education </a>
@@ -194,7 +194,7 @@
                             <div class="member-img">
                                 <img src="{{asset('frontend/assets/img/website/w3.jpeg')}}" class="img-fluid websiteImg" alt="">
                                 <div class="social">
-                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                    <a href="{{route('frontend.template')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
                                         <i class='bx bx-laptop' ></i>
                                     </a>
                                     <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
@@ -203,7 +203,7 @@
                                 </div>
                             </div>
                             <div class="member-info">
-                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <a href="{{route('frontend.template')}}"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
                                 <span>
                                     By <a href="" class="mulish_bold"> Admin </a>
                                     in <a href="" class="mulish_bold"> Education </a>
@@ -222,7 +222,7 @@
                             <div class="member-img">
                                 <img src="{{asset('frontend/assets/img/website/w4.png')}}" class="img-fluid websiteImg" alt="">
                                 <div class="social">
-                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                    <a href="{{route('frontend.template')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
                                         <i class='bx bx-laptop' ></i>
                                     </a>
                                     <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
@@ -231,7 +231,7 @@
                                 </div>
                             </div>
                             <div class="member-info">
-                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <a href="{{route('frontend.template')}}"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
                                 <span>
                                     By <a href="" class="mulish_bold"> Admin </a>
                                     in <a href="" class="mulish_bold"> Education </a>

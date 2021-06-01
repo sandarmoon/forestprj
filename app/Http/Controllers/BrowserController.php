@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Browser;
 class BrowserController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class BrowserController extends Controller
      */
     public function index()
     {
-        
+        $browsers = Browser::orderBy('id','DESC')->get();
+        return view('backend.browser.index',compact('browsers'));
     }
 
     /**
@@ -34,7 +35,14 @@ class BrowserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $browser = new Browser;
+        $browser->name = $request->name;
+        $browser->save();
+        return redirect()->route('browser.index')->with('msg','Successfully added');
     }
 
     /**
@@ -68,7 +76,14 @@ class BrowserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $request->validate([
+            'name' => 'required',
+        ]);
+
+        $browser = new Browser;
+        $browser->name = $request->name;
+        $browser->save();
+        return "ok";
     }
 
     /**
@@ -79,6 +94,8 @@ class BrowserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $browser = Browser::find($id);
+        $browser->delete();
+        return redirect()->route('browser.index')->with('msg','Successfully deleted');
     }
 }

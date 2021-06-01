@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class AuthorController extends Controller
 {
@@ -23,7 +24,11 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::check()){
+            $user=Auth::user();
+            $user->assignRole('author');
+             return redirect()->route('dashboard'); 
+        }
     }
 
     /**

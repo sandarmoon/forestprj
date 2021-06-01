@@ -56,8 +56,294 @@
                 </div>
 
                 <div class="row">
+                    @if(!empty($latestitems))
+                    @if(count($latestitems) == 4)
+                        @foreach($latestitems as $latestitem)
+                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                            <div class="member" data-aos="fade-up">
+                                <div class="member-img">
+                                    <img src="{{asset($latestitem->thumbnail)}}" class="img-fluid websiteImg" alt="">
+                                    <div class="social">
+                                        <a href="{{$latestitem->demoUrl}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                            <i class='bx bx-laptop' ></i>
+                                        </a>
+                                        <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
+                                            <i class='bx bx-heart' ></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <a href="#"> <h4> {{$latestitem->name}}</h4> </a>
+                                    <span>
+                                        By <a href="" class="mulish_bold"> {{$latestitem->author->user->name}} </a>
+                                        in <a href="" class="mulish_bold"> {{$latestitem->subcategory->name}} </a>
+                                    </span>
+                                    <div class="my-2">
+                                        <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
+                                        @if($latestitem->status == 'Free')
+                                            <p class="d-inline-block float-end text-primary fw-bold mulish_bold"> Free  </p>
+                                        @else
+                                            <p class="d-inline-block float-end text-primary fw-bold mulish_bold">{{$latestitem->price}}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    @elseif(count($latestitems) == 3)
+                        @foreach($latestitems as $latestitem)
+                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                            <div class="member" data-aos="fade-up">
+                                <div class="member-img">
+                                    <img src="{{asset($latestitem->thumbnail)}}" class="img-fluid websiteImg" alt="">
+                                    <div class="social">
+                                        <a href="{{$latestitem->demoUrl}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                            <i class='bx bx-laptop' ></i>
+                                        </a>
+                                        <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
+                                            <i class='bx bx-heart' ></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <a href="#"> <h4>{{$latestitem->name}}</h4> </a>
+                                    <span>
+                                        By <a href="" class="mulish_bold"> {{$latestitem->author->user->name}} </a>
+                                        in <a href="" class="mulish_bold"> {{$latestitem->subcategory->name}} </a>
+                                    </span>
+                                    <div class="my-2">
+                                        <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
+                                        <p class="d-inline-block float-end text-primary fw-bold mulish_bold"> Free  </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up">
+                            <div class="member-img">
+                                <img src="{{asset('frontend/assets/img/website/w1.png')}}" class="img-fluid websiteImg" alt="">
+                                <div class="social">
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                        <i class='bx bx-laptop' ></i>
+                                    </a>
+                                    <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
+                                        <i class='bx bx-heart' ></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <a href="#"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <span>
+                                    By <a href="" class="mulish_bold"> Admin </a>
+                                    in <a href="" class="mulish_bold"> Education </a>
+                                </span>
+                                <div class="my-2">
+                                    <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
+                                    <p class="d-inline-block float-end text-primary fw-bold mulish_bold"> Free  </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @elseif(count($latestitems) == 2)
+                        @foreach($latestitems as $latestitem)
+                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                            <div class="member" data-aos="fade-up">
+                                <div class="member-img">
+                                    <img src="{{asset($latestitem->thumbnail)}}" class="img-fluid websiteImg" alt="">
+                                    <div class="social">
+                                        <a href="{{$latestitem->demoUrl}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                            <i class='bx bx-laptop' ></i>
+                                        </a>
+                                        <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
+                                            <i class='bx bx-heart' ></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <a href="#"> <h4> {{$latestitem->name}}</h4> </a>
+                                    <span>
+                                        By <a href="" class="mulish_bold"> {{$latestitem->author->user->name}} </a>
+                                        in <a href="" class="mulish_bold"> {{$latestitem->subcategory->name}} </a>
+                                    </span>
+                                    <div class="my-2">
+                                        <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
+                                        <p class="d-inline-block float-end text-primary fw-bold mulish_bold"> Free  </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up">
+                            <div class="member-img">
+                                <img src="{{asset('frontend/assets/img/website/w1.png')}}" class="img-fluid websiteImg" alt="">
+                                <div class="social">
+                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                        <i class='bx bx-laptop' ></i>
+                                    </a>
+                                    <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
+                                        <i class='bx bx-heart' ></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <span>
+                                    By <a href="" class="mulish_bold"> Admin </a>
+                                    in <a href="" class="mulish_bold"> Education </a>
+                                </span>
+                                <div class="my-2">
+                                    <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
+                                    <p class="d-inline-block float-end text-primary fw-bold mulish_bold"> Free  </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="100">
+                            <div class="member-img">
+                                <img src="{{asset('frontend/assets/img/website/w2.jpeg')}}" class="img-fluid websiteImg" alt="">
+                                <div class="social">
+                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                        <i class='bx bx-laptop' ></i>
+                                    </a>
+                                    <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
+                                        <i class='bx bx-heart' ></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <span>
+                                    By <a href="" class="mulish_bold"> Admin </a>
+                                    in <a href="" class="mulish_bold"> Education </a>
+                                </span>
+                                <div class="my-2">
+                                    <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
+                                    <p class="d-inline-block float-end text-danger fw-bold mulish_bold"> $39  </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @else
+                    @foreach($latestitems as $latestitem)
+                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                            <div class="member" data-aos="fade-up">
+                                <div class="member-img">
+                                    <img src="{{asset($latestitem->thumbnail)}}" class="img-fluid websiteImg" alt="">
+                                    <div class="social">
+                                        <a href="{{$latestitem->demoUrl}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                            <i class='bx bx-laptop' ></i>
+                                        </a>
+                                        <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
+                                            <i class='bx bx-heart' ></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <a href="#"> <h4> {{$latestitem->name}}</h4> </a>
+                                    <span>
+                                        By <a href="" class="mulish_bold"> {{$latestitem->author->user->name}} </a>
+                                        in <a href="" class="mulish_bold"> {{$latestitem->subcategory->name}} </a>
+                                    </span>
+                                    <div class="my-2">
+                                        <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
+                                        <p class="d-inline-block float-end text-primary fw-bold mulish_bold"> Free  </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+
+                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up">
+                            <div class="member-img">
+                                <img src="{{asset('frontend/assets/img/website/w1.png')}}" class="img-fluid websiteImg" alt="">
+                                <div class="social">
+                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                        <i class='bx bx-laptop' ></i>
+                                    </a>
+                                    <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
+                                        <i class='bx bx-heart' ></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <span>
+                                    By <a href="" class="mulish_bold"> Admin </a>
+                                    in <a href="" class="mulish_bold"> Education </a>
+                                </span>
+                                <div class="my-2">
+                                    <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
+                                    <p class="d-inline-block float-end text-primary fw-bold mulish_bold"> Free  </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="100">
+                            <div class="member-img">
+                                <img src="{{asset('frontend/assets/img/website/w2.jpeg')}}" class="img-fluid websiteImg" alt="">
+                                <div class="social">
+                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                        <i class='bx bx-laptop' ></i>
+                                    </a>
+                                    <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
+                                        <i class='bx bx-heart' ></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <span>
+                                    By <a href="" class="mulish_bold"> Admin </a>
+                                    in <a href="" class="mulish_bold"> Education </a>
+                                </span>
+                                <div class="my-2">
+                                    <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
+                                    <p class="d-inline-block float-end text-danger fw-bold mulish_bold"> $39  </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="200">
+                            <div class="member-img">
+                                <img src="{{asset('frontend/assets/img/website/w3.jpeg')}}" class="img-fluid websiteImg" alt="">
+                                <div class="social">
+                                    <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
+                                        <i class='bx bx-laptop' ></i>
+                                    </a>
+                                    <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
+                                        <i class='bx bx-heart' ></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                                <span>
+                                    By <a href="" class="mulish_bold"> Admin </a>
+                                    in <a href="" class="mulish_bold"> Education </a>
+                                </span>
+                                <div class="my-2">
+                                    <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
+                                    <p class="d-inline-block float-end text-danger fw-bold mulish_bold"> 5,000 MMK  </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @endif
+                    @endif
+                    <!-- <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                         <div class="member" data-aos="fade-up">
                             <div class="member-img">
                                 <img src="{{asset('frontend/assets/img/website/w1.png')}}" class="img-fluid websiteImg" alt="">
@@ -165,7 +451,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="d-grid gap-2 col-3 mx-auto mt-3 " data-aos="fade-up" data-aos-delay="300">
                         <a href="#" class="custombtn_outline"> View More </a>
