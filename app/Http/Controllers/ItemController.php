@@ -107,12 +107,15 @@ class ItemController extends Controller
         for( $i = 0; $i < $za->numFiles; $i++ ){ 
     $stat = $za->statIndex( $i ); 
     if(basename( $stat['name'] ) == 'index.html'){
+        $statname = $stat['name'];
+        
         $tt = 'test';
         break;
     }
 }
 if($tt == 'test'){
-    $urll = '/storage/zipfile/'.time().'/'.basename($stat1['name']).'/index.html';
+   // $urll = '/storage/zipfile/'.time().'/'.basename($stat1['name']).'/index.html';
+    $urll = '/storage/zipfile/'.time().'/'.$statname;
     $item = new Item();
         $item->name = request('name');
         $item->zipfile = $zipfilepath;
@@ -126,6 +129,7 @@ if($tt == 'test'){
         $item->demoUrl = $urll;
         $item->responsive = request('responsive');
         $item->tag = request('tag');
+
         if($request->status == 'Premium')
         {
             $request->validate([
