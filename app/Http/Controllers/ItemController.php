@@ -379,7 +379,7 @@ if($tt == 'test'){
         $item->thumbnail = $thumbnailfilepath;
         $item->previews = $previewfilepath;
         $item->subcategory_id = request('subcategory');
-        $item->author_id = 1;
+        $item->author_id = Auth::id();
         $item->genre_id = request('genre');
         $item->version = request('version');
         $item->demoUrl = $urll;
