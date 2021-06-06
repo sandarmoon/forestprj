@@ -11,8 +11,8 @@ class FrontendController extends Controller
   public function index()
   {
     $latestitems = Item::orderBy('id','desc')->limit(4)->get();
-    
-    return view('frontend.index',compact('latestitems'));
+    $freesimplies = Item::where('status','Free')->orderBy('id','desc')->limit(4)->get();
+    return view('frontend.index',compact('latestitems','freesimplies'));
   }
 
   public function contact()

@@ -251,11 +251,11 @@
             </div>
 
             <div class="row">
-
+                @foreach($freesimplies as $freesimply)
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up">
                         <div class="member-img">
-                            <img src="{{asset('frontend/assets/img/website/w1.png')}}" class="img-fluid websiteImg" alt="">
+                            <img src="{{asset($freesimply->thumbnail)}}" class="img-fluid websiteImg" alt="">
                             <div class="social">
                                 <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
                                     <i class='bx bx-laptop' ></i>
@@ -266,10 +266,10 @@
                             </div>
                         </div>
                         <div class="member-info">
-                            <a href="template.html"> <h4> GutenWP - Free Gutenberg Co...</h4> </a>
+                            <a href="template.html"> <h4> {{$freesimply->name}}</h4> </a>
                             <span>
-                                By <a href="" class="mulish_bold"> Admin </a>
-                                in <a href="" class="mulish_bold"> Education </a>
+                                By <a href="" class="mulish_bold"> {{$freesimply->author->user->name}} </a>
+                                in <a href="" class="mulish_bold"> {{$freesimply->subcategory->name}} </a>
                             </span>
                             <div class="my-2">
                                 <p class="d-inline-block fst-normal"> <i class='bx bxs-download' ></i> 1,000  </p>
@@ -278,8 +278,9 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                <!-- <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="100">
                         <div class="member-img">
                             <img src="{{asset('frontend/assets/img/website/w2.jpeg')}}" class="img-fluid websiteImg" alt="">
@@ -305,10 +306,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+               <!--  <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
                             <img src="{{asset('frontend/assets/img/website/w3.jpeg')}}" class="img-fluid websiteImg" alt="">
@@ -334,9 +335,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+               <!--  <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="300">
                         <div class="member-img">
                             <img src="{{asset('frontend/assets/img/website/w4.png')}}" class="img-fluid websiteImg" alt="">
@@ -362,7 +363,7 @@
                         </div>
                     </div>
                 </div>
-
+ -->
                
             </div>
 
