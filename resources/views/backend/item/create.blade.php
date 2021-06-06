@@ -74,6 +74,11 @@
                 <div class="col-6">
                   <input type="file" name="file" class="form-control-file" id="file" accept=".zip">
                   <div class="form-control-feedback text-danger"> {{$errors->first('file') }} </div>
+                  @if(session('err'))
+                  <div class="form-control-feedback text-danger">
+                    {{session('err')}}
+                  </div>
+                  @endif
                 </div>
               </div>
 

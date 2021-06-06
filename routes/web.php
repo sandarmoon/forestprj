@@ -50,9 +50,13 @@ Route::resource('/subcategory',SubcategoryController::class);
 Route::resource('/language',LanguageController::class);
 
 Route::resource('/genres',GenresController::class);
-Route::resource('/item',ItemController::class);
-Route::get('itemtype',[ItemController::class,'itemtype'])->name('itemtype');
-Route::get('itemtypeedit',[ItemController::class,'itemtypeedit'])->name('itemtypeedit');
+
+Route::group(['middleware' => ['role:author']], function () {
+  Route::resource('/item',ItemController::class);
+  Route::get('itemtype',[ItemController::class,'itemtype'])->name('itemtype');
+  Route::get('itemtypeedit',[ItemController::class,'itemtypeedit'])->name('itemtypeedit');
+});
+
 Route::resource('/author',AuthorController::class);
 
 Route::get('/category_index',[CategoryController::class,'category_index'])->name('category_index');

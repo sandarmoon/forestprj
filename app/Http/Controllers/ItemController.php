@@ -11,6 +11,7 @@ use VIPSoft\Unzip\Unzip;
 use ZipArchive;
 use App\Models\Browser;
 use App\Models\Language;
+use Auth;
 
 class ItemController extends Controller
 {
@@ -54,9 +55,10 @@ class ItemController extends Controller
         //
      // dd($request->languages);
      //dd($request->browsers);
+        //dd($request->file->getSize() > 0);
         $request->validate([
             'name' => 'required',
-            'file' => 'required|file|mimes:zip',
+            
             'thumbnail' => 'required|file|mimes:jpg,jpeg,bmp,png',
             'preview' => 'required|file|mimes:jpg,jpeg,bmp,png',
             'subcategory' => 'required',
@@ -68,13 +70,19 @@ class ItemController extends Controller
             'status' => 'required',
             'message' => 'required'
         ]);
-
+        if($request->file->getSize() > 0){
+            $request->validate([
+                'file' => 'required|file|mimes:zip'
+            ]);
         //zip file
         $fileName = time().'.'.$request->file->extension();  
-        
+        $explode = explode('.', $fileName);
         $path = $request->file->storeAs('zipfile',$fileName,'public');
 
         $zipfilepath = "/storage/".$path;
+    }else{
+        return redirect()->back()->with('err','Your zip file error!')->withInput();
+    }
        // $path= $request->file->move(public_path('zipfile'), $fileName);
         
         //thumbnail
@@ -101,7 +109,8 @@ class ItemController extends Controller
 
         $za->extractTo(storage_path('app/public/zipfile/').time().'/');
         //$za->close();
- $stat1 = $za->statIndex(0 ); 
+        $stat1 = $za->statIndex(0 );
+
 //dd(basename($stat['name']));
         $tt  =  '';
         for( $i = 0; $i < $za->numFiles; $i++ ){ 
@@ -113,16 +122,17 @@ class ItemController extends Controller
         break;
     }
 }
+
 if($tt == 'test'){
    // $urll = '/storage/zipfile/'.time().'/'.basename($stat1['name']).'/index.html';
-    $urll = '/storage/zipfile/'.time().'/'.$statname;
+    $urll = '/storage/zipfile/'.$explode[0].'/'.$statname;
     $item = new Item();
         $item->name = request('name');
         $item->zipfile = $zipfilepath;
         $item->thumbnail = $thumbnailfilepath;
         $item->previews = $previewfilepath;
         $item->subcategory_id = request('subcategory');
-        $item->author_id = 1;
+        $item->author_id = Auth::id();
         $item->genre_id = request('genre');
         $item->version = request('version');
         /*$item->demoUrl = request('url');*/
@@ -152,7 +162,7 @@ if($tt == 'test'){
 
         return redirect()->route('item.index')->with('msg','Item Successfully added'); 
     }else{
-        return redirect()->back();
+        return redirect()->back()->with('msg','Your zip file index.html not found')->withInput();
     }
 
 /*if( basename( $stat['name'] ) . PHP_EOL != 'index.html'){
