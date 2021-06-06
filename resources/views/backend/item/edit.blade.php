@@ -90,6 +90,11 @@
                       
                         
                         <div class="form-control-feedback text-danger"> {{$errors->first('file') }} </div>
+                        @if(session('err'))
+                        <div class="form-control-feedback text-danger">
+                          {{session('err')}}
+                        </div>
+                        @endif
                       </div>
                     </div>
 

@@ -268,6 +268,7 @@ if($tt == 'test'){
         $item = Item::find($id);
 
         if($request->hasfile('file')){
+            if($request->file->getSize() > 0){
             $request->validate([
                  'file' => 'required|file|mimes:zip'
              ]);
@@ -277,11 +278,13 @@ if($tt == 'test'){
 
             //zip file
             $fileName = time().'.'.$request->file->extension();  
-            
+            $explode = explode('.', $fileName);
             $path = $request->file->storeAs('zipfile',$fileName,'public');
 
             $zipfilepath = "/storage/".$path;
-
+             }else{
+                return redirect()->back()->with('err','Your zip file error!')->withInput();
+            }
 
             /*$unzipper  = new Unzip();
   
@@ -299,12 +302,13 @@ if($tt == 'test'){
             for( $i = 0; $i < $za->numFiles; $i++ ){ 
             $stat = $za->statIndex( $i ); 
             if(basename( $stat['name'] ) == 'index.html'){
+                $statname = $stat['name'];
                 $tt = 'test';
                 break;
                 }
             }
                 if($tt == 'test'){
-                    $urll = '/storage/zipfile/'.time().'/'.basename($stat1['name']).'/index.html';
+                    $urll = '/storage/zipfile/'.$explode[0].'/'.$statname;
                 }else{
                     return redirect()->back();
                 }
