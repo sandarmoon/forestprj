@@ -35,7 +35,12 @@ class ItemController extends Controller
     {
         //
         $categories = Category::all();
-        return view('backend.item.create',compact('categories'));
+
+        $subcategories = Subcategory::get();
+        $genres = Genre::all();
+        $browsers = Browser::all();
+        $languages = Language::all();
+        return view('backend.item.create',compact('categories','subcategories','genres','browsers','languages'));
     }
 
     /**
@@ -408,16 +413,11 @@ if($tt == 'test'){
 
     public function itemtype(Request $request)
     {
-        $request->validate(['type'=>'required']);
-        $type = $request->type;
-        $category = Category::find($type);
+        $categoryid = $request->categoryid;
+        
+        $subcategories = Subcategory::where('category_id',$categoryid)->get();
 
-        $subcategories = Subcategory::where('category_id',$type)->get();
-        $genres = Genre::all();
-        $browsers = Browser::all();
-        $languages = Language::all();
-
-        return view('backend.item.uploadform',compact('category','subcategories','genres','browsers','languages'));
+        return $subcategories;
     }
 
     public function itemtypeedit(Request $request)
