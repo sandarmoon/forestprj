@@ -75,17 +75,7 @@
                                 @endphp ( {{count($item)}} ) </span></a>
                             </li>
                             @endforeach
-                            <!-- <li>
-                                <a href="{{route('frontend.templates')}}"> Education <span> ( 5 ) </span>  </a>
-                            </li>
-                            
-                            <li>
-                                <a href="{{route('frontend.templates')}}">Portfolio <span> ( 2 ) </span></a>
-                            </li>
-                            <li>
-                                <a href="{{route('frontend.templates')}}"> E-commerce <span> ( 3 ) </span> </a>
-                            </li>
-                            <li><a href="{{route('frontend.templates')}}"> Hospital <span> ( 4 ) </span> </a></li> -->
+                           
                         </ul>
                     </li>
 
@@ -106,16 +96,7 @@
                                  ( {{count($languageitem)}} ) </span></a>
                             </li>
                             @endforeach
-                            <!-- <li>
-                                <a href="{{route('frontend.templates')}}"> HTML Template <span> ( 5 ) </span>  </a>
-                            </li>
-                            
-                            <li>
-                                <a href="{{route('frontend.templates')}}"> CSS Template <span> ( 2 ) </span></a>
-                            </li>
-                            <li>
-                                <a href="{{route('frontend.templates')}}"> Bootstrap Template <span> ( 3 ) </span> </a>
-                            </li> -->
+                          
                         </ul>
                     </li>
 
