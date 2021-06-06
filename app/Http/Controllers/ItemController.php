@@ -221,8 +221,11 @@ if($tt == 'test'){
         //
         $item = Item::find($id);
         $categories = Category::all();
+        $subcategories = Subcategory::all();
+        $genres = Genre::all();
+        $browsers = Browser::all();
 
-        return view('backend.item.edit',compact('item','categories'));
+        return view('backend.item.edit',compact('item','categories','subcategories','genres','browsers'));
     }
 
     /**
@@ -420,29 +423,5 @@ if($tt == 'test'){
         return $subcategories;
     }
 
-    public function itemtypeedit(Request $request)
-    {
-        $request->validate(['type'=>'required','typeid'=>'required','cid' => 'required']);
-
-        
-        $type = $request->type;
-        $cid = $request->cid;
-        if($cid == $type){
-            $item = Item::find($request->typeid);
-            $category = Category::find($cid);
-            $subcategories = Subcategory::where('category_id',$cid)->get();
-            $itemid = [];
-        }else{
-            $item = [];
-            $itemid = Item::find($request->typeid);
-            $category = Category::find($type);
-
-            $subcategories = Subcategory::where('category_id',$type)->get();
-        }
-        $genres = Genre::all();
-        $browsers = Browser::all();
-        $languages = Language::all();
-
-        return view('backend.item.edituploadform',compact('category','subcategories','genres','item','itemid','browsers','languages'));
-    }
+    
 }
