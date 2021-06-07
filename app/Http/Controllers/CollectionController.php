@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Collection;
 use Illuminate\Http\Request;
+use Auth;
+use Carbon;
+
 
 class CollectionController extends Controller
 {
@@ -35,7 +38,31 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $request->validate([
+            'name'=>'required',
+            'description' => 'min:0|max:100',
+        ]);
+
+        $collections = Collection::where('user_id',Auth::id())->orderBy('id','DESC')->get();
+
+        if(count($collections)>0){
+            if($collections[0]->sorting){
+                $sorting = $collections[0]->sorting+1;
+            }else{
+                $sorting = 1;
+            }
+        }else{
+            $sorting = 1;
+        }
+
+        $collection = new Collection;
+        $collection->title = $request->name;
+        $collection->description = $request->description;
+        $collection->sorting = $sorting;
+        $collection->user_id = Auth::id();
+        $collection->save();
+        return "ok";
     }
 
     /**
@@ -78,8 +105,15 @@ class CollectionController extends Controller
      * @param  \App\Models\Collection  $collection
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Collection $collection)
+    public function destroy(Collection $collection ,Request $request)
     {
-        //
+        $collection = Collection::find($request->id);
+        $collection->delete();
+        foreach($collection->items as $item){
+            // echo($item->pivot);
+            $item->pivot->deleted_at = Carbon\Carbon::today();
+            $item->pivot->save();
+        }
+        return "ok";
     }
 }

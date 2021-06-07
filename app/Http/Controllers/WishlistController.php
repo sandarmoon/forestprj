@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Auth;
 
 class WishlistController extends Controller
 {
@@ -14,7 +15,8 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        //
+        $wishlists = Wishlist::where('user_id',Auth::id())->get();
+        return view('frontend.wishlist',compact('wishlists'));
     }
 
     /**
@@ -36,6 +38,37 @@ class WishlistController extends Controller
     public function store(Request $request)
     {
         //
+        $array = Array();
+        $data = Wishlist::withTrashed()->get();
+        foreach($data as $row){
+            if($row->item_id == $request->item_id && $row->user_id == Auth::id()){
+                array_push($array, $row);
+            }
+        }
+
+        if($array){
+            foreach($array as $row){
+                if($row->deleted_at){
+
+                    $row->restore();
+                    return 'ok';
+
+                }else{
+
+                    $row->delete();
+                    return 'delete';
+                }
+            }
+        }else{
+            $wishlist = new Wishlist;
+            $wishlist->item_id = $request->item_id;
+            $wishlist->user_id = Auth::id();
+            $wishlist->save();
+
+            return 'ok';
+        }
+
+        
     }
 
     /**

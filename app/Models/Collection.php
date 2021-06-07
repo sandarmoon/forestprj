@@ -10,5 +10,10 @@ class Collection extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['title','user_id','description','sorting']
+    protected $fillable = ['title','user_id','description','sorting'];
+
+    public function items($value='')
+    {
+        return $this->belongsToMany('App\Models\Item')->withPivot('sorting')->withTimestamps();
+    }
 }

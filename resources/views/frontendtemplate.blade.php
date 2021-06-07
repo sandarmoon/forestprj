@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title> Themetreasure </title>
     <meta content="" name="description">
@@ -141,6 +142,12 @@
                             </li>
                             <li>
                                 <a href="templates.html"> List <span> ( 3 ) </span> </a>
+                            </li>
+                            <li>
+                                <a href="{{route('wishlist')}}"> Wishlist </a>
+                            </li>
+                            <li>
+                                <a href="{{route('collection')}}"> Collection </a>
                             </li>
                             <li>
                                 <a class="dropdown-item preview-item" href="route('logout')" class="d-inline" 
@@ -450,6 +457,7 @@
             })
         })
     </script>
+    @yield('script')
 
 </body>
 

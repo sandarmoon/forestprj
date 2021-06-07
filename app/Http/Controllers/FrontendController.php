@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Wishlist;
+use App\Models\Collection;
+use Auth;
 
 class FrontendController extends Controller
 {
@@ -11,8 +14,26 @@ class FrontendController extends Controller
   public function index()
   {
     $latestitems = Item::orderBy('id','desc')->limit(4)->get();
+    $wishlists = Wishlist::where('user_id',Auth::id())->get(); 
     
-    return view('frontend.index',compact('latestitems'));
+    return view('frontend.index',compact('latestitems','wishlists'));
+  }
+
+  public function wishlist(Request $request)
+  {
+    $tab = 1;
+    $wishlists = Wishlist::where('user_id',Auth::id())->get();
+    $collections = Collection::where('user_id',Auth::id())->get();
+
+    return view('account.mydashboard',compact('collections','wishlists','tab'));
+  }
+
+  public function collection()
+  {
+    $tab = 2;
+    $collections = Collection::where('user_id',Auth::id())->get();
+    $wishlists = Wishlist::where('user_id',Auth::id())->get();
+    return view('account.mydashboard',compact('collections','wishlists','tab'));
   }
 
   public function contact()

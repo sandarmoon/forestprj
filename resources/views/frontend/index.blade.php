@@ -44,7 +44,6 @@
 
     </section><!-- End Hero -->
 
-  
     <main id="main">
         <!-- ======= Latest Section ======= -->
         <section id="team" class="team ">
@@ -508,8 +507,18 @@
                                     <a href="template.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Demo Preview">
                                         <i class='bx bx-laptop' ></i>
                                     </a>
-                                    <a href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Collection">
-                                        <i class='bx bx-heart' ></i>
+                                    <a href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist" class="btn_heart" data-item_id = '1'>
+                                        <audio id="mysoundclip" preload="auto">
+                                            <source src="{{asset('frontend/assets/plugin/zapsplat_multimedia_cell_phone_smart_screen_button_press_click_feedback_003_60932.mp3')}}"></source>
+                                        </audio>
+                                        <i class="bi bi-heart-fill heart_1 
+                                        @foreach($wishlists as $wishlist)
+                                            @if($wishlist->item_id == 1 && $wishlist->user_id == Auth::id())
+                                            text-danger
+                                            @endif
+                                        @endforeach"
+
+                                        ></i>
                                     </a>
                                 </div>
                             </div>
@@ -807,4 +816,37 @@
         <!-- End Services Section -->
 
     </main><!-- End #main -->
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        var audio = $("#mysoundclip")[0];
+        $('.btn_heart').click(function(){
+            var item_id = $(this).data('item_id');
+
+            audio.play();
+            var route = "{{route('mywishlist.store')}}";
+            $.post(route,{item_id,item_id},function(res){
+                if(res == 'ok'){
+                    $('.heart_1').addClass('text-danger');
+                }else if(res == 'delete'){
+
+                    $('.heart_1').removeClass('text-danger');
+                    
+                }
+            })
+
+            
+        })
+    })
+</script>
 @endsection

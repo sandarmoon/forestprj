@@ -36,4 +36,10 @@ class Item extends Model
     {
         return $this->belongsToMany('App\Models\Browser','browser_item');
     }
+
+
+    public function collections($value='')
+    {
+        return $this->belongsToMany('App\Models\Collection')->withPivot('sorting')->withTimestamps();
+    }
 }

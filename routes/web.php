@@ -12,6 +12,9 @@ use App\Http\Controllers\GenresController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CollectionController;
+
 
 
 
@@ -68,6 +71,16 @@ Route::get('checkout',[FrontendController::class,'checkout'])->name('frontend.ch
 Route::get('illustration',[FrontendController::class,'illustration'])->name('frontend.illustration');
 Route::get('template',[FrontendController::class,'template'])->name('frontend.template');
 Route::get('templates',[FrontendController::class,'templates'])->name('frontend.templates');
+
+
+// nyi
+Route::resource('mywishlist',WishlistController::class);
+Route::resource('mycollection',CollectionController::class);
+
+Route::get('wishlist',[FrontendController::class,'wishlist'])->name('wishlist');
+Route::get('collection',[FrontendController::class,'collection'])->name('collection');
+
+
 
 //author route
 
