@@ -111,8 +111,25 @@ class WishlistController extends Controller
      * @param  \App\Models\Wishlist  $wishlist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wishlist $wishlist)
+    public function destroy(Wishlist $wishlist,Request $request)
     {
-        //
+        
+        $wishlist = Wishlist::find($request->id);
+        $wishlist->delete();
+        
+        $wishlists = Wishlist::where('user_id',Auth::id())
+                ->with(array('item'=>function($query){
+
+                    $query->with(array('author'=>function($q){
+                      $q->with('user');
+
+                    }));
+
+                    $query->with('subcategory');
+
+                }))->get();
+   
+    return response()->json($wishlists);
+        
     }
 }

@@ -14,9 +14,10 @@ class FrontendController extends Controller
   public function index()
   {
     $latestitems = Item::orderBy('id','desc')->limit(4)->get();
-    $wishlists = Wishlist::where('user_id',Auth::id())->get(); 
+    $wishlists = Wishlist::where('user_id',Auth::id())->get();
+    $freesimplies = Item::where('status','Free')->orderBy('id','desc')->limit(4)->get(); 
     
-    return view('frontend.index',compact('latestitems','wishlists'));
+    return view('frontend.index',compact('latestitems','wishlists','freesimplies'));
   }
 
   public function wishlist(Request $request)
@@ -24,9 +25,27 @@ class FrontendController extends Controller
     $tab = 1;
     $wishlists = Wishlist::where('user_id',Auth::id())->get();
     $collections = Collection::where('user_id',Auth::id())->get();
-
+   
     return view('account.mydashboard',compact('collections','wishlists','tab'));
   }
+
+  public function getwishlist(Request $request)
+  {
+    $wishlists = Wishlist::where('user_id',Auth::id())
+                ->with(array('item'=>function($query){
+
+                    $query->with(array('author'=>function($q){
+                      $q->with('user');
+
+                    }));
+
+                    $query->with('subcategory');
+
+                }))->get();
+   
+    return response()->json($wishlists);
+  }
+
 
   public function collection()
   {

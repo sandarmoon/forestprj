@@ -12,5 +12,8 @@ class Wishlist extends Model
 
     protected $fillable = ['user_id','item_id'];
 
-    
+    public function item($value='')
+    {
+        return $this->belongsTo('App\Models\Item');
+    }
 }

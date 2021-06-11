@@ -42,4 +42,9 @@ class Item extends Model
     {
         return $this->belongsToMany('App\Models\Collection')->withPivot('sorting')->withTimestamps();
     }
+
+    public function wishlist($value='')
+    {
+        return $this->hasOne('App\Models\Wishlist');
+    }
 }

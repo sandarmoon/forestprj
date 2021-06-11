@@ -38,11 +38,12 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $tab = 2;
         $request->validate([
             'name'=>'required',
             'description' => 'min:0|max:100',
         ]);
+
 
         $collections = Collection::where('user_id',Auth::id())->orderBy('id','DESC')->get();
 
@@ -62,7 +63,7 @@ class CollectionController extends Controller
         $collection->sorting = $sorting;
         $collection->user_id = Auth::id();
         $collection->save();
-        return "ok";
+        return $tab;
     }
 
     /**
@@ -96,7 +97,17 @@ class CollectionController extends Controller
      */
     public function update(Request $request, Collection $collection)
     {
-        //
+        $tab = 2;
+        $request->validate([
+            'name'=>'required',
+            'description' => 'min:0|max:100',
+        ]);
+
+        $collection = Collection::find($request->id);
+        $collection->title = $request->name;
+        $collection->description = $request->description;
+        $collection->save();
+        return $tab;
     }
 
     /**

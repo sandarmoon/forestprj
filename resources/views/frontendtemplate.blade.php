@@ -9,6 +9,7 @@
     <title> Themetreasure </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicons -->
     <link href="{{asset('frontend/assets/logo/logo_transparent.png')}}" rel="icon">
@@ -30,6 +31,7 @@
     <link href="{{asset('frontend/assets/css/color.css')}}" rel="stylesheet">
     <link href="{{asset('frontend/assets/css/style.css')}}" rel="stylesheet">
 </head>
+
 
 <body>
     @php $url = request()->route()->uri; @endphp
@@ -76,17 +78,7 @@
                                 @endphp ( {{count($item)}} ) </span></a>
                             </li>
                             @endforeach
-                            <!-- <li>
-                                <a href="{{route('frontend.templates')}}"> Education <span> ( 5 ) </span>  </a>
-                            </li>
-                            
-                            <li>
-                                <a href="{{route('frontend.templates')}}">Portfolio <span> ( 2 ) </span></a>
-                            </li>
-                            <li>
-                                <a href="{{route('frontend.templates')}}"> E-commerce <span> ( 3 ) </span> </a>
-                            </li>
-                            <li><a href="{{route('frontend.templates')}}"> Hospital <span> ( 4 ) </span> </a></li> -->
+                           
                         </ul>
                     </li>
 
@@ -107,16 +99,7 @@
                                  ( {{count($languageitem)}} ) </span></a>
                             </li>
                             @endforeach
-                            <!-- <li>
-                                <a href="{{route('frontend.templates')}}"> HTML Template <span> ( 5 ) </span>  </a>
-                            </li>
-                            
-                            <li>
-                                <a href="{{route('frontend.templates')}}"> CSS Template <span> ( 2 ) </span></a>
-                            </li>
-                            <li>
-                                <a href="{{route('frontend.templates')}}"> Bootstrap Template <span> ( 3 ) </span> </a>
-                            </li> -->
+                          
                         </ul>
                     </li>
 
@@ -206,6 +189,13 @@
 
         </div>
     </header>
+
+    {{-- wishlist button audio --}}
+
+    <audio id="mysoundclip" preload="auto">
+        <source src="{{asset('frontend/assets/plugin/zapsplat_multimedia_cell_phone_smart_screen_button_press_click_feedback_003_60932.mp3')}}"></source>
+    </audio>
+
     @yield('content')
    
     <!-- ======= Footer ======= -->
